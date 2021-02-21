@@ -1,14 +1,8 @@
 package com.dstrube.myapplication;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
-/**
- * Created by dstrubex on 6/29/15.
- */
-public class AtomicByteArray extends AtomicIntegerArray {
+public class AtomicByteArray extends AtomicIntegerArray{
     //Yes, it's an int array at the bottom; but we are careful to only allow bytes in
 //    private final int[] array;
     //On second thought, a local array is redundant
@@ -84,31 +78,5 @@ public class AtomicByteArray extends AtomicIntegerArray {
         return (byte) super.addAndGet(i, delta);
     }
 
-    private Context mContext;
-    public void setContext(Context context){
-        mContext = context;
-    }
-    public String prefTest(){
-        if (null == mContext){
-            return "";
-        }
-        SharedPreferences prefs = mContext.getSharedPreferences(MainActivity.class.getSimpleName(),
-                Context.MODE_WORLD_WRITEABLE); //other options: MODE_WORLD_READABLE, MODE_PRIVATE
-        if (prefs.getAll().size() == 0) {
-            return "";
-        }
-        String result;
-        boolean isUpdateNeeded = prefs.getBoolean("updateNeeded",true);
-        SharedPreferences.Editor editor0 = prefs.edit();
-        if (isUpdateNeeded){
-            result = "false";
-            editor0.putBoolean("updateNeeded",false);
-        }
-        else{
-            result = "true";
-            editor0.putBoolean("updateNeeded",true);
-        }
-        editor0.apply();
-        return result;
-    }
+
 }

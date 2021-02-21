@@ -1,7 +1,6 @@
 package com.dstrube.myapplication;
 
 public class BinaryTreeSort {
-
     private static BinaryTree root;  // Pointer to the root node in a binary tree.
     // This tree is used in this program as a binary sort tree.  When the tree is empty,
     // root is null (as it is initially).
@@ -48,5 +47,4 @@ public class BinaryTreeSort {
             }
         } // end while
     }  // end treeInsert()
-
 }

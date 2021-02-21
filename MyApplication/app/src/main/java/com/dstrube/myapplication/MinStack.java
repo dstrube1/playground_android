@@ -2,11 +2,7 @@ package com.dstrube.myapplication;
 
 import java.util.Stack;
 
-/**
- *
- */
 public class MinStack extends Stack {
-
     private Stack<Integer> mMin;
     public static final Integer NO_MIN = Integer.MAX_VALUE;
 

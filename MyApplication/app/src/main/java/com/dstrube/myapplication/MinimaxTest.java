@@ -1,25 +1,24 @@
 package com.dstrube.myapplication;
 
+/*
+ * Incomplete
+ *
+ * Ruby:
+ * http://neverstopbuilding.com/minimax
+ * http://www.flyingmachinestudios.com/programming/minimax/
+ *
+ * Java:
+ * https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe_AI.html
+ * http://www.codebytes.in/2014/08/minimax-algorithm-tic-tac-toe-ai-in.html
+ * http://www.codebytes.in/2014/11/alpha-beta-pruning-minimax-algorithm.html
+ * */
+
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/*
-* Incomplete
-*
-* Ruby:
-* http://neverstopbuilding.com/minimax
-* http://www.flyingmachinestudios.com/programming/minimax/
-*
-* Java:
-* https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe_AI.html
-* http://www.codebytes.in/2014/08/minimax-algorithm-tic-tac-toe-ai-in.html
-* http://www.codebytes.in/2014/11/alpha-beta-pruning-minimax-algorithm.html
-* */
-
 public class MinimaxTest {
-
     private class Board{
         private final String TAG = Board.class.getSimpleName();
 

@@ -13,7 +13,6 @@ import java.util.Random;
  * https://en.wikipedia.org/wiki/Sorting_algorithm#Comparison_of_algorithms
  */
 public class MySortTest {
-
     private static final String TAG = MySortTest.class.getSimpleName();
 
 
@@ -95,21 +94,21 @@ public class MySortTest {
         //http://www.java2novice.com/java-sorting-algorithms/bubble-sort/
         //https://en.wikipedia.org/wiki/Bubble_sort
 
-/*
-* Bubble sort, also referred to as sinking sort, is a simple sorting algorithm that works by
-* repeatedly stepping through the list to be sorted, comparing each pair of adjacent items and
-* swapping them if they are in the wrong order. The pass through the list is repeated until no swaps
-* are needed, which indicates that the list is sorted. The algorithm gets its name from the way
-* smaller elements "bubble" to the top of the list. Because it only uses comparisons to operate on
-* elements, it is a comparison sort. Although the algorithm is simple, most of the other sorting
-* algorithms are more efficient for large lists.
-*
-* Bubble sort has worst-case and average complexity both О(n^2), where n is the number of items being
-* sorted. There exist many sorting algorithms with substantially better worst-case or average
-* complexity of O(n log n). Even other О(n^2) sorting algorithms, such as insertion sort, tend to have
-* better performance than bubble sort. Therefore, bubble sort is not a practical sorting algorithm
-* when n is large. Performance of bubble sort over an already-sorted list (best-case) is O(n).
-* */
+        /*
+         * Bubble sort, also referred to as sinking sort, is a simple sorting algorithm that works by
+         * repeatedly stepping through the list to be sorted, comparing each pair of adjacent items and
+         * swapping them if they are in the wrong order. The pass through the list is repeated until no swaps
+         * are needed, which indicates that the list is sorted. The algorithm gets its name from the way
+         * smaller elements "bubble" to the top of the list. Because it only uses comparisons to operate on
+         * elements, it is a comparison sort. Although the algorithm is simple, most of the other sorting
+         * algorithms are more efficient for large lists.
+         *
+         * Bubble sort has worst-case and average complexity both О(n^2), where n is the number of items being
+         * sorted. There exist many sorting algorithms with substantially better worst-case or average
+         * complexity of O(n log n). Even other О(n^2) sorting algorithms, such as insertion sort, tend to have
+         * better performance than bubble sort. Therefore, bubble sort is not a practical sorting algorithm
+         * when n is large. Performance of bubble sort over an already-sorted list (best-case) is O(n).
+         * */
         final int arraySize = array.length;
         int nextIndex;
         for (int howManyLoops = arraySize; howManyLoops >= 0; howManyLoops--) {
@@ -154,12 +153,12 @@ public class MySortTest {
         //https://en.wikipedia.org/wiki/Gnome_sort
         //http://dickgrune.com/Programs/gnomesort.html
 
-/*
-* Here is how a garden gnome sorts a line of flower pots. Basically, he looks at the flower pot
-* next to him and the previous one; if they are in the right order he steps one pot forward,
-* otherwise he swaps them and steps one pot backwards. Boundary conditions: if there is no previous
-* pot, he steps forwards; if there is no pot next to him, he is done.
-* */
+        /*
+         * Here is how a garden gnome sorts a line of flower pots. Basically, he looks at the flower pot
+         * next to him and the previous one; if they are in the right order he steps one pot forward,
+         * otherwise he swaps them and steps one pot backwards. Boundary conditions: if there is no previous
+         * pot, he steps forwards; if there is no pot next to him, he is done.
+         * */
         int i = 0;
         final int n = array.length;
 
@@ -238,36 +237,36 @@ public class MySortTest {
         //https://en.wikipedia.org/wiki/Insertion_sort
         //http://www.java2novice.com/java-sorting-algorithms/insertion-sort/
 
-/*
-* Insertion sort is a simple sorting algorithm, it builds the final sorted array one item at a time.
-* It is much less efficient on large lists than other sort algorithms.
-*
-* Advantages of Insertion Sort:
-*
-* 1) It is very simple.
-* 2) It is very efficient for small data sets.
-* 3) It is stable; i.e., it does not change the relative order of elements with equal keys.
-* 4) In-place; i.e., only requires a constant amount O(1) of additional memory space.
-*
-* Insertion sort iterates through the list by consuming one input element at each repetition, and
-* growing a sorted output list. On a repetition, insertion sort removes one element from the input
-* data, finds the location it belongs within the sorted list, and inserts it there. It repeats until
-* no input elements remain.
-*
-* The best case input is an array that is already sorted. In this case insertion sort has a linear
-* running time (i.e., Θ(n)). During each iteration, the first remaining element of the input is only
-* compared with the right-most element of the sorted subsection of the array. The simplest worst
-* case input is an array sorted in reverse order. The set of all worst case inputs consists of all
-* arrays where each element is the smallest or second-smallest of the elements before it. In these
-* cases every iteration of the inner loop will scan and shift the entire sorted subsection of the
-* array before inserting the next element. This gives insertion sort a quadratic running time
-* (i.e., O(n2)). The average case is also quadratic, which makes insertion sort impractical for
-* sorting large arrays. However, insertion sort is one of the fastest algorithms for sorting very
-* small arrays, even faster than quicksort; indeed, good quicksort implementations use insertion
-* sort for arrays smaller than a certain threshold, also when arising as subproblems; the exact
-* threshold must be determined experimentally and depends on the machine, but is commonly around ten.
-*
-* */
+        /*
+         * Insertion sort is a simple sorting algorithm, it builds the final sorted array one item at a time.
+         * It is much less efficient on large lists than other sort algorithms.
+         *
+         * Advantages of Insertion Sort:
+         *
+         * 1) It is very simple.
+         * 2) It is very efficient for small data sets.
+         * 3) It is stable; i.e., it does not change the relative order of elements with equal keys.
+         * 4) In-place; i.e., only requires a constant amount O(1) of additional memory space.
+         *
+         * Insertion sort iterates through the list by consuming one input element at each repetition, and
+         * growing a sorted output list. On a repetition, insertion sort removes one element from the input
+         * data, finds the location it belongs within the sorted list, and inserts it there. It repeats until
+         * no input elements remain.
+         *
+         * The best case input is an array that is already sorted. In this case insertion sort has a linear
+         * running time (i.e., Θ(n)). During each iteration, the first remaining element of the input is only
+         * compared with the right-most element of the sorted subsection of the array. The simplest worst
+         * case input is an array sorted in reverse order. The set of all worst case inputs consists of all
+         * arrays where each element is the smallest or second-smallest of the elements before it. In these
+         * cases every iteration of the inner loop will scan and shift the entire sorted subsection of the
+         * array before inserting the next element. This gives insertion sort a quadratic running time
+         * (i.e., O(n2)). The average case is also quadratic, which makes insertion sort impractical for
+         * sorting large arrays. However, insertion sort is one of the fastest algorithms for sorting very
+         * small arrays, even faster than quicksort; indeed, good quicksort implementations use insertion
+         * sort for arrays smaller than a certain threshold, also when arising as subproblems; the exact
+         * threshold must be determined experimentally and depends on the machine, but is commonly around ten.
+         *
+         * */
         int temp;
         for (int i = 1; i < array.length; i++) {
             for (int j = i; j > 0; j--) {
@@ -284,12 +283,12 @@ public class MySortTest {
         //http://www.java2novice.com/java-sorting-algorithms/merge-sort/
         //https://en.wikipedia.org/wiki/Merge_sort
 
-/*
-* Merge sort is a fast, stable sorting routine with guaranteed O(n*log(n)) efficiency.
-* When sorting arrays, merge sort requires additional scratch space proportional to the size
-* of the input array. Merge sort is relatively simple to code and offers performance
-* typically only slightly below that of quicksort.
-* */
+        /*
+         * Merge sort is a fast, stable sorting routine with guaranteed O(n*log(n)) efficiency.
+         * When sorting arrays, merge sort requires additional scratch space proportional to the size
+         * of the input array. Merge sort is relatively simple to code and offers performance
+         * typically only slightly below that of quicksort.
+         * */
 
         Log.i(TAG, "Begin mergeSort");
         doMergeSort(array, 0, array.length - 1);
@@ -346,23 +345,23 @@ public class MySortTest {
         //https://en.wikipedia.org/wiki/Quicksort
         //http://www.java2novice.com/java-sorting-algorithms/quick-sort/
 
-/*
-* Quicksort or partition-exchange sort, is a fast sorting algorithm, which is using divide
-* and conquer algorithm. Quicksort first divides a large list into two smaller sub-lists:
-* the low elements and the high elements. Quicksort can then recursively sort the sub-lists.
-*
-* Steps to implement Quick sort:
-*
-* 1) Choose an element, called pivot, from the list. Generally pivot can be the middle index element.
-* 2) Reorder the list so that all elements with values less than the pivot come before the
-* pivot, while all elements with values greater than the pivot come after it (equal values
-* can go either way). After this partitioning, the pivot is in its final position. This is
-* called the partition operation.
-* 3) Recursively apply the above steps to the sub-list of elements with smaller values and
-* separately the sub-list of elements with greater values.
-*
-* The complexity of quick sort in the average case is Θ(n log(n)) and in the worst case is Θ(n2).
-* */
+        /*
+         * Quicksort or partition-exchange sort, is a fast sorting algorithm, which is using divide
+         * and conquer algorithm. Quicksort first divides a large list into two smaller sub-lists:
+         * the low elements and the high elements. Quicksort can then recursively sort the sub-lists.
+         *
+         * Steps to implement Quick sort:
+         *
+         * 1) Choose an element, called pivot, from the list. Generally pivot can be the middle index element.
+         * 2) Reorder the list so that all elements with values less than the pivot come before the
+         * pivot, while all elements with values greater than the pivot come after it (equal values
+         * can go either way). After this partitioning, the pivot is in its final position. This is
+         * called the partition operation.
+         * 3) Recursively apply the above steps to the sub-list of elements with smaller values and
+         * separately the sub-list of elements with greater values.
+         *
+         * The complexity of quick sort in the average case is Θ(n log(n)) and in the worst case is Θ(n2).
+         * */
 
         Log.i(TAG, "Begin quickSort");
 
@@ -379,7 +378,7 @@ public class MySortTest {
         final int pivot = array[lowerIndex + (higherIndex - lowerIndex) / 2];
         // Divide into two arrays
         while (i <= j) {
-            /**
+            /*
              * In each iteration, we will identify a number from left side which
              * is greater then the pivot value, and also we will identify a number
              * from right side which is less then the pivot value. Once the search
@@ -412,20 +411,20 @@ public class MySortTest {
         //https://en.wikipedia.org/wiki/Selection_sort
         //http://www.java2novice.com/java-sorting-algorithms/selection-sort/
 
-/*
-* The selection sort is a combination of searching and sorting. During each pass, the unsorted
-* element with the smallest (or largest) value is moved to its proper position in the array. The
-* number of times the sort passes through the array is one less than the number of items in the
-* array. In the selection sort, the inner loop finds the next smallest (or largest) value and the
-* outer loop places that value into its proper location.
-*
-* Selection sort is not difficult to analyze compared to other sorting algorithms since none of the
-* loops depend on the data in the array. Selecting the lowest element requires scanning all n
-* elements (this takesn − 1 comparisons) and then swapping it into the first position. Finding the
-* next lowest element requires scanning the remaining n − 1 elements and so on,
-* for (n − 1) + (n − 2) + ... + 2 + 1 = n(n − 1) / 2 ∈ Θ(n2) comparisons.
-* Each of these scans requires one swap for n − 1 elements.
-* */
+        /*
+         * The selection sort is a combination of searching and sorting. During each pass, the unsorted
+         * element with the smallest (or largest) value is moved to its proper position in the array. The
+         * number of times the sort passes through the array is one less than the number of items in the
+         * array. In the selection sort, the inner loop finds the next smallest (or largest) value and the
+         * outer loop places that value into its proper location.
+         *
+         * Selection sort is not difficult to analyze compared to other sorting algorithms since none of the
+         * loops depend on the data in the array. Selecting the lowest element requires scanning all n
+         * elements (this takes n − 1 comparisons) and then swapping it into the first position. Finding the
+         * next lowest element requires scanning the remaining n − 1 elements and so on,
+         * for (n − 1) + (n − 2) + ... + 2 + 1 = n(n − 1) / 2 ∈ Θ(n2) comparisons.
+         * Each of these scans requires one swap for n − 1 elements.
+         * */
         for (int i = 0; i < array.length - 1; i++) {
             int index = i;
             for (int j = i + 1; j < array.length; j++)

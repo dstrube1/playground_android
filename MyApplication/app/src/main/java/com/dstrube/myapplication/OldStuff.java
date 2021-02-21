@@ -1,19 +1,8 @@
 package com.dstrube.myapplication;
 
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,18 +10,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.NinePatch;
 import android.net.Uri;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Message;
 import android.os.PowerManager;
-import android.security.KeyPairGeneratorSpec;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,8 +25,6 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -70,7 +52,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -87,16 +68,11 @@ import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import javax.security.auth.x500.X500Principal;
-
-/**
- * Created by dstrubex on 12/7/15.
- */
 public class OldStuff {
     private final String TAG = this.getClass().getSimpleName();
     private String text;
 
-//    @Override
+    //    @Override
     protected void onStop() {
 //        super.onStop();
         stopAlarmTest();
@@ -458,7 +434,7 @@ public class OldStuff {
 //        try {
 //            inputStream = getResources().getAssets().open("invalidname");//blah.txt");
 //            size = inputStream.available();
-            text += "\nsize in the try catch: " + size;
+        text += "\nsize in the try catch: " + size;
 //            inputStream.close();
 //        } catch (IOException e) {
 //            text = "IOException while checking size of InputStream ";
@@ -1092,14 +1068,6 @@ public class OldStuff {
             Log.e(TAG, e.getMessage());
             text += e.getMessage();
         }
-    }
-
-
-    private void enumTest() {
-
-        MyEnum myEnum;
-        myEnum = MyEnum.BANJO;
-//        tv.setText(tv.getText() + "\nmyEnum = " + myEnum);
     }
 
     private void batteryTest() {
@@ -2015,7 +1983,7 @@ public class OldStuff {
             database.close();
         }
 
-        /**
+        /*
          * Update row
          *
          * @param queryValues
@@ -2038,7 +2006,7 @@ public class OldStuff {
 //            }
 //        }
 
-        /**
+        /*
          * Delete row
          *
          * @param id
@@ -2131,5 +2099,4 @@ public class OldStuff {
             return wordList;
         }
     }
-
 }

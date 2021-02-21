@@ -4,12 +4,12 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
 
 public class MyAlarmService extends Service {
-
     private static final String TAG = MyAlarmService.class.getSimpleName();
 
     private boolean isStarted = false;
@@ -50,12 +50,15 @@ public class MyAlarmService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 //        if (! isStarted) {
-            Log.i(TAG, "Starting Vibrate");
-            Toast.makeText(this, "Starting Vibrate", Toast.LENGTH_SHORT)
-                    .show();
-            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(500);
-            isStarted = true;
+        Log.i(TAG, "Starting Vibrate");
+        Toast.makeText(this, "Starting Vibrate", Toast.LENGTH_SHORT)
+                .show();
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        //Deprecated:
+//        vibrator.vibrate(500);
+        //TODO research VibrationEffect
+        vibrator.vibrate(VibrationEffect.EFFECT_DOUBLE_CLICK);
+        isStarted = true;
 //        } else {
 //            Log.w(TAG, "Try to start an already started service");
 //        }

@@ -2,11 +2,7 @@ package com.dstrube.myapplication;
 
 import android.util.Log;
 
-/**
- * Created by dstrubex on 6/29/15.
- */
-public class MyRunnable implements Runnable {
-
+public class MyRunnable implements Runnable{
     private String mName;
 
     public MyRunnable(String name) {
