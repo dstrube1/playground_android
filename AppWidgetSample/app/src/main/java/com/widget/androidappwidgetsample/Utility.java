@@ -1,6 +1,5 @@
 package com.widget.androidappwidgetsample;
 
-
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,6 +1,5 @@
 package com.widget.androidappwidgetsample;
 
-
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -19,7 +18,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl;
         if (pm != null) {
-            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
+            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
             //Acquire the lock
             wl.acquire(10000);
         }else {
