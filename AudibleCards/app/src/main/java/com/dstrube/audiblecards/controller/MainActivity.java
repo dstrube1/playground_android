@@ -64,17 +64,17 @@ public class MainActivity extends Activity {
 			return;
 		}
 		try {
-			String text = "";
+			StringBuilder text = new StringBuilder();
 
 			if (deck.getSize() <= 0) {
-				text = "Empty deck";
+				text = new StringBuilder("Empty deck");
 			} else {
 				ArrayList<Card> cards = deck.getCards();
 				for (Card card : cards) {
-					text += card.getRank() + " of " + card.getSuit() + "\n";
+					text.append(card.getRank()).append(" of ").append(card.getSuit()).append("\n");
 				}
 			}
-			textView.setText(text);
+			textView.setText(text.toString());
 		} catch (InvalidDeckOperationException e) {
 			Toast.makeText(getApplicationContext(), e.getMessage(),
 					Toast.LENGTH_LONG).show();
@@ -105,10 +105,7 @@ public class MainActivity extends Activity {
 			}
 			deck = new Deck(cards);
 			updateTextView();
-		} catch (InvalidDeckOperationException e) {
-			Toast.makeText(getApplicationContext(), e.getMessage(),
-					Toast.LENGTH_LONG).show();
-		} catch (InvalidCardOperationException e) {
+		} catch (InvalidDeckOperationException | InvalidCardOperationException e) {
 			Toast.makeText(getApplicationContext(), e.getMessage(),
 					Toast.LENGTH_LONG).show();
 		}
@@ -210,9 +207,8 @@ public class MainActivity extends Activity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			return inflater.inflate(R.layout.fragment_main, container,
 					false);
-			return rootView;
 		}
 	}
 
