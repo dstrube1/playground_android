@@ -44,7 +44,10 @@ public class HeroInfoControl extends LinearLayout {
     }
  
     public void setHeroName(String name) {
-        mHeroName.setText("::" + name + "::");
+        String s =  ":: ";
+        s+= name;
+        s+=  " ::";
+        mHeroName.setText(s);
     }
  
 }
