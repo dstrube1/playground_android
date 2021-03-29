@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomAdapterToday extends SimpleAdapter {
-    private Context context;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final LayoutInflater inflater;
 //    private ArrayList<HashMap<String, String>> data;
 
     public CustomAdapterToday(Context context, List<? extends Map<String, ?>> data, int resource,

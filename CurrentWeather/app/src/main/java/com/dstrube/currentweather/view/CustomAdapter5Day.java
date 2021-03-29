@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomAdapter5Day extends SimpleAdapter {
-    private Context context;
-    private LayoutInflater inflater;
-    private ArrayList<HashMap<String, String>> data;
+    private final Context context;
+    private final LayoutInflater inflater;
+    private final ArrayList<HashMap<String, String>> data;
 
     public CustomAdapter5Day(Context context, List<? extends Map<String, ?>> data, int resource,
                              String[] from, int[] to) {
