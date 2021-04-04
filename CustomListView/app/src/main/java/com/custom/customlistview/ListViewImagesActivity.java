@@ -44,12 +44,7 @@ public class ListViewImagesActivity extends Activity {
 					long id) {
 				Object o = lv1.getItemAtPosition(position);
 				ItemDetails obj_itemDetails = (ItemDetails) o;
-				if (obj_itemDetails.getChecked()) {
-					obj_itemDetails.setChecked(false);
-				}
-				else{
-					obj_itemDetails.setChecked(true);
-				}
+				obj_itemDetails.setChecked(!obj_itemDetails.getChecked());
 				
 				adapter.notifyDataSetChanged();
 				

@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class ItemListBaseAdapter extends BaseAdapter {
 	private static ArrayList<ItemDetails> itemDetailsArrayList;
 	
-	private Integer[] imgid = {
+	private final Integer[] imgid = {
 			R.drawable.p1,  //pizza1
 			R.drawable.bb2, //burger
 			R.drawable.p2,  //pizza
@@ -25,7 +25,7 @@ public class ItemListBaseAdapter extends BaseAdapter {
 			R.drawable.d1   //drink
 			};
 	
-	private LayoutInflater l_Inflater;
+	private final LayoutInflater l_Inflater;
 
 	public ItemListBaseAdapter(Context context, ArrayList<ItemDetails> results) {
 		itemDetailsArrayList = results;
