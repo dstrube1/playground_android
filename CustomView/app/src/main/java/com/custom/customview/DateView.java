@@ -2,11 +2,16 @@ package com.custom.customview;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import static com.custom.customview.R.*;
+import static com.custom.customview.R.styleable.*;
 
 public class DateView extends TextView {
    public String delimiter;
@@ -20,7 +25,7 @@ public class DateView extends TextView {
    public DateView(Context context, AttributeSet attrs) {
       super(context, attrs);
       
-      TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DateView );
+      TypedArray a = context.obtainStyledAttributes(attrs, DateView );
       
       final int N = a.getIndexCount();
       for (int i = 0; i < N; ++i)
@@ -29,14 +34,16 @@ public class DateView extends TextView {
 
          switch (attr)
          {
-            case R.styleable.DateView_delimiter:
+            case styleable.DateView_delimiter:
             delimiter = a.getString(attr);
             setDate();
             break;
-         case R.styleable.DateView_fancyText:
+         case styleable.DateView_fancyText:
             fancyText = a.getBoolean(attr, false);
             fancyText();
             break;
+            default:
+               throw new IllegalStateException("Unexpected value: " + attr);
          }
       }
       a.recycle();
@@ -49,7 +56,7 @@ public class DateView extends TextView {
 
    private void setDate() {
       SimpleDateFormat dateFormat = 
-      new SimpleDateFormat("yyyy" + delimiter + "MM" + delimiter + "dd");
+      new SimpleDateFormat("yyyy" + delimiter + "MM" + delimiter + "dd", Locale.US);
       String today = dateFormat.format(Calendar.getInstance().getTime());
       setText(today);  // self = DateView = subclass of TextView
    }
