@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CustonListView_0.iml" filepath="$PROJECT_DIR$/CustonListView_0.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CustonListView_0.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CustonListView_0.app.iml" />
     </modules>
   </component>
 </project>

@@ -11,6 +11,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		MusicAsyncTask rest = new MusicAsyncTask(this);
-		rest.execute(new String[] { "getMusic" });
+		rest.execute("getMusic");
 	}
 }

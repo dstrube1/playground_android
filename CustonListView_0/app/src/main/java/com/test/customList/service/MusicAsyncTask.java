@@ -24,7 +24,7 @@ import android.widget.Toast;
 public class MusicAsyncTask extends AsyncTask<String, String, String> {
 
 	Context uiContext;
-	private ProgressDialog pdia;
+	private final ProgressDialog pdia;
 
 	public MusicAsyncTask(Context myContext) {
 		this.uiContext = myContext;
@@ -46,9 +46,8 @@ public class MusicAsyncTask extends AsyncTask<String, String, String> {
 		System.out.println("Params " + params[0]);
 
 		HashMap<String, String> postParam = new HashMap<>();
-		String resp = HttpConnectionManager.getMusicList(postParam);
 
-		return resp;
+		return HttpConnectionManager.getMusicList(postParam);
 
 	}
 
@@ -59,13 +58,9 @@ public class MusicAsyncTask extends AsyncTask<String, String, String> {
 
 
 		if (null == result || result.equals("")  ) {
-			if (result.equals("success")) {
-				Toast.makeText(uiContext, "Successfully Submit!!",
-						Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(uiContext, "Failed!!",
-						Toast.LENGTH_LONG).show();
-			}
+			assert result != null;
+			Toast.makeText(uiContext, "Failed!!",
+					Toast.LENGTH_LONG).show();
 
 		} else {
 

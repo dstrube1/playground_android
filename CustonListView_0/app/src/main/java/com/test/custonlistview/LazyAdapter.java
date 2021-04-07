@@ -15,16 +15,14 @@ import android.widget.TextView;
 
 public class LazyAdapter extends BaseAdapter {
 
-    private Activity activity;
-    private ArrayList<MusicVO> data;
+    private final ArrayList<MusicVO> data;
     private static LayoutInflater inflater = null;
-    private ImageLoader imageLoader;
+    private final ImageLoader imageLoader;
 
     public LazyAdapter(Activity a, ArrayList<MusicVO> d) {
-        activity = a;
         data = d;
-        inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        imageLoader = new ImageLoader(activity.getApplicationContext());
+        inflater = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        imageLoader = new ImageLoader(a.getApplicationContext());
     }
 
     public int getCount() {

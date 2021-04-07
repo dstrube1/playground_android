@@ -23,7 +23,7 @@ public class ImageLoader {
 
 	MemoryCache memoryCache = new MemoryCache();
 	FileCache fileCache;
-	private Map<ImageView, String> imageViews = Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
+	private final Map<ImageView, String> imageViews = Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
 	ExecutorService executorService;
 
 	public ImageLoader(Context context) {
