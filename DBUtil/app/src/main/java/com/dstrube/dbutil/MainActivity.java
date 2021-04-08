@@ -90,17 +90,17 @@ public class MainActivity extends Activity {
             StringBuilder text = new StringBuilder();
             text.append(textView.getText());
             result = result && create0();
-            text.append("\n 0: " + dbUtil.getDatabaseName());
+            text.append("\n 0: ").append(dbUtil.getDatabaseName());
             result = result && create1();
-            text.append("\n 1: " + dbUtil.getDatabaseName());
+            text.append("\n 1: ").append(dbUtil.getDatabaseName());
             result = result && create2Version();
-            text.append("\n 2a: " + dbUtil.getDatabaseName());
+            text.append("\n 2a: ").append(dbUtil.getDatabaseName());
             result = result && create2dbName();
-            text.append("\n 2b: " + dbUtil.getDatabaseName());
+            text.append("\n 2b: ").append(dbUtil.getDatabaseName());
             result = result && create3();
-            text.append("\n 3: " + dbUtil.getDatabaseName());
+            text.append("\n 3: ").append(dbUtil.getDatabaseName());
             result = result && create4();
-            text.append("\n 4: " + dbUtil.getDatabaseName());
+            text.append("\n 4: ").append(dbUtil.getDatabaseName());
             if (display) {
                 textView.setText(text);
             } else {
@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
             // textView.setText(textView.getText() + " - " + db.toString());
 
         } catch (Exception e) {
-            textView.setText("Error in testCreates: " + e.getMessage());
+            textView.setText(new StringBuilder().append("Error in testCreates: ").append(e.getMessage()).toString());
             return false;
         }
         return result;
@@ -126,8 +126,7 @@ public class MainActivity extends Activity {
             dbUtil = new Utils();
             return true;
         } catch (UtilsException e) {
-            textView.setText("Error creating utils object with 0 params: "
-                    + e.getMessage());
+            textView.setText(new StringBuilder().append("Error creating utils object with 0 params: ").append(e.getMessage()).toString());
             return false;
         }
     }
@@ -141,8 +140,9 @@ public class MainActivity extends Activity {
             dbUtil = new Utils(getBaseContext());
             return true;
         } catch (UtilsException e) {
-            textView.setText("Error creating utils object with 1 params: "
-                    + e.getMessage());
+            textView.setText(new StringBuilder()
+                    .append("Error creating utils object with 1 params: ")
+                    .append(e.getMessage()).toString());
             return false;
         }
     }
@@ -156,8 +156,9 @@ public class MainActivity extends Activity {
             dbUtil = new Utils(getBaseContext(), 2);
             return true;
         } catch (UtilsException e) {
-            textView.setText("Error creating utils object with 2 params, version: "
-                    + e.getMessage());
+            textView.setText(new StringBuilder()
+                    .append("Error creating utils object with 2 params, version: ")
+                    .append(e.getMessage()).toString());
             return false;
         }
     }
@@ -171,8 +172,9 @@ public class MainActivity extends Activity {
             dbUtil = new Utils(getBaseContext(), "anotherVaildName");
             return true;
         } catch (UtilsException e) {
-            textView.setText("Error creating utils object with 2 params, dbName: "
-                    + e.getMessage());
+            textView.setText(new StringBuilder()
+                    .append("Error creating utils object with 2 params, dbName: ")
+                    .append(e.getMessage()).toString());
             return false;
         }
     }
@@ -187,8 +189,9 @@ public class MainActivity extends Activity {
                     2);
             return true;
         } catch (UtilsException e) {
-            textView.setText("Error creating utils object with 2 params, dbName: "
-                    + e.getMessage());
+            textView.setText(new StringBuilder()
+                    .append("Error creating utils object with 2 params, dbName: ")
+                    .append(e.getMessage()).toString());
             return false;
         }
     }
@@ -212,8 +215,9 @@ public class MainActivity extends Activity {
                     cursorFactory, 2);
             return true;
         } catch (UtilsException e) {
-            textView.setText("Error creating utils object with 2 params, dbName: "
-                    + e.getMessage());
+            textView.setText(new StringBuilder()
+                    .append("Error creating utils object with 2 params, dbName: ")
+                    .append(e.getMessage()).toString());
             return false;
         }
     }
@@ -227,15 +231,16 @@ public class MainActivity extends Activity {
             ArrayList<String> tableNames = dbUtil.getTableNames();
             if (tableNames == null) {
                 if (display) {
-                    textView.setText(textView.getText()
-                            + "\n tableNames is null; makes sense; setting tableNames...");
+                    textView.setText(new StringBuilder()
+                            .append(textView.getText())
+                            .append("\n tableNames is null; makes sense; setting tableNames...").toString());
                 }
             } else if (tableNames.size() == 0) {
                 textView.setText(textView.getText()
                         + "\n tableNames is empty; makes sense");
             } else {
-                textView.setText(textView.getText()
-                        + "\n tableNames is not empty. Wha?!");
+                textView.setText(new StringBuilder()
+                        .append(textView.getText()).append("\n tableNames is not empty. Wha?!").toString());
                 return false;
             }
 
@@ -244,17 +249,17 @@ public class MainActivity extends Activity {
             dbUtil.setTableNames(tableNamesIn);
             tableNames = dbUtil.getTableNames();
             if (tableNames == null) {
-                textView.setText(textView.getText()
-                        + "\n tableNames is null. Wha?!");
+                textView.setText(new StringBuilder().append(textView.getText())
+                        .append("\n tableNames is null. Wha?!").toString());
                 return false;
             } else if (tableNames.size() == 0) {
-                textView.setText(textView.getText()
-                        + "\n tableNames is empty. Wha?!");
+                textView.setText(new StringBuilder().append(textView.getText())
+                        .append("\n tableNames is empty. Wha?!").toString());
                 return false;
             } else {
                 if (display) {
-                    textView.setText(textView.getText()
-                            + "\n tableNames is not empty; makes sense");
+                    textView.setText(new StringBuilder().append(textView.getText())
+                            .append("\n tableNames is not empty; makes sense").toString());
                 }
             }
 
@@ -263,11 +268,12 @@ public class MainActivity extends Activity {
             // tableNamesIn.add(TABLE_NAME_3rd);
             dbUtil.setTableNames(tableNamesIn);
             tableNames = dbUtil.getTableNames();
-            textView.setText(textView.getText() + "\n we have "
-                    + tableNames.size() + " tables");
+            textView.setText(new StringBuilder().append(textView.getText())
+                    .append("\n we have ").append(tableNames.size()).append(" tables").toString());
             return true;
         } catch (Exception e) {
-            textView.setText("Error in testTableNames: " + e.getMessage());
+            textView.setText(new StringBuilder().append("Error in testTableNames: ")
+                    .append(e.getMessage()).toString());
             return false;
         }
     }
@@ -284,15 +290,15 @@ public class MainActivity extends Activity {
 
             if (columns == null) {
                 if (display) {
-                    textView.setText(textView.getText()
-                            + "\n columns is null; makes sense; setting columns...");
+                    textView.setText(new StringBuilder().append(textView.getText())
+                            .append("\n columns is null; makes sense; setting columns...").toString());
                 }
             } else if (columns.size() == 0) {
-                textView.setText(textView.getText()
-                        + "\n columns is empty; makes sense");
+                textView.setText(new StringBuilder().append(textView.getText())
+                        .append("\n columns is empty; makes sense").toString());
             } else {
-                textView.setText(textView.getText()
-                        + "\n columns is not empty. Wha?!");
+                textView.setText(new StringBuilder().append(textView.getText())
+                        .append("\n columns is not empty. Wha?!").toString());
                 return false;
             }
 
@@ -317,17 +323,17 @@ public class MainActivity extends Activity {
             dbUtil.setColumns(columnsIn);
             columns = dbUtil.getColumns();
             if (columns == null) {
-                textView.setText(textView.getText()
-                        + "\n columns is null. Wha?!");
+                textView.setText(new StringBuilder().append(textView.getText())
+                        .append("\n columns is null. Wha?!").toString());
                 return false;
             } else if (columns.size() == 0) {
-                textView.setText(textView.getText()
-                        + "\n columns is empty. Wha?!");
+                textView.setText(new StringBuilder().append(textView.getText())
+                        .append("\n columns is empty. Wha?!").toString());
                 return false;
             } else {
                 if (display) {
-                    textView.setText(textView.getText()
-                            + "\n columns is not empty; makes sense");
+                    textView.setText(new StringBuilder().append(textView.getText())
+                            .append("\n columns is not empty; makes sense").toString());
                 }
             }
 
@@ -375,8 +381,8 @@ public class MainActivity extends Activity {
              * if (columns == null) { textView.setText(textView.getText() +
              * "\n columns is null. Wha?!"); return false; } else
              */if (columns.size() == 0) {
-                textView.setText(textView.getText()
-                        + "\n columns is empty. Wha?!");
+                textView.setText(new StringBuilder().append(textView.getText())
+                        .append("\n columns is empty. Wha?!").toString());
                 return false;
             } else {
                 int count = 0;
@@ -384,9 +390,9 @@ public class MainActivity extends Activity {
                     count += table.getColumnNames().size();
                 }
                 if (display) {
-                    textView.setText(textView.getText()
-                            + "\n number of columns : " + count
-                            + "\n inserting and selecting rows...");
+                    textView.setText(new StringBuilder().append(textView.getText())
+                            .append("\n number of columns : ").append(count)
+                            .append("\n inserting and selecting rows...").toString());
                 }
             }
 
@@ -416,7 +422,7 @@ public class MainActivity extends Activity {
 
             return true;
         } catch (Exception e) {
-            textView.setText("Error in testColumns: " + e.getMessage());
+            textView.setText(String.format("Error in testColumns: %s", e.getMessage()));
             return false;
         }
     }
@@ -432,7 +438,7 @@ public class MainActivity extends Activity {
             // result = result && testSelectAllWhere(display);
             return result;
         } catch (Exception e) {
-            textView.setText("Error from testSelects: " + e.getMessage());
+            textView.setText(String.format("Error from testSelects: %s", e.getMessage()));
             return false;
         }
     }
@@ -446,20 +452,18 @@ public class MainActivity extends Activity {
                     .getAllRows(TABLE_NAME_first);
             if (display) {
                 if (allRows == null) {
-                    textView.setText(textView.getText() + "\n all rows = null");
+                    textView.setText(String.format("%s\n all rows = null", textView.getText()));
                 } else {
-                    textView.setText(textView.getText()
-                            + "\n all rows count = " + allRows.size());
+                    textView.setText(String.format("%s\n all rows count = %d", textView.getText(), allRows.size()));
                     if (allRows.size() > 0) {
-                        textView.setText(textView.getText() + "\n Rows: ");
+                        textView.setText(String.format("%s\n Rows: ", textView.getText()));
                     }
                     for (Hashtable<String, String> row : allRows) {
                         Enumeration<String> enumKey = row.keys();
                         while (enumKey.hasMoreElements()) {
                             String key = enumKey.nextElement();
                             String val = row.get(key);
-                            textView.setText(textView.getText() + "\n " + key
-                                    + " = " + val);
+                            textView.setText(String.format("%s\n %s = %s", textView.getText(), key, val));
                         }
                     }
                 }
@@ -469,8 +473,7 @@ public class MainActivity extends Activity {
             // wrapping this in a display check clause because an error is
             // expected before inserting any rows
             if (display) {
-                textView.setText(textView.getText()
-                        + "\n Error from testSelectAll: " + e.getMessage());
+                textView.setText(String.format("%s\n Error from testSelectAll: %s", textView.getText(), e.getMessage()));
             }
             // or we could append the error instead of overwriting everything
             return false;
@@ -532,7 +535,7 @@ public class MainActivity extends Activity {
 
             return true;
         } catch (Exception e) {
-            textView.setText("Error from testInsert: " + e.getMessage());
+            textView.setText(String.format("Error from testInsert: %s", e.getMessage()));
             return false;
         }
     }

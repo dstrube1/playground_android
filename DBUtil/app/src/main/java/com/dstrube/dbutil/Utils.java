@@ -156,38 +156,13 @@ public class Utils extends SQLiteOpenHelper {
 	@SuppressLint("NewApi")
 	@Override
 	public String getDatabaseName() {
-		if (android.os.Build.VERSION.SDK_INT >= 14) {
+		{
 			// just for grins:
-			SQLiteDatabase db = null;
-			try {
-				db = super.getReadableDatabase();
+			try (SQLiteDatabase db = super.getReadableDatabase()) {
 			} catch (NullPointerException e) {
 				// do nothing
-			} finally {
-				if (db != null) {
-					db.close();
-				}
 			}
 			return super.getDatabaseName();
-		} else {
-			SQLiteDatabase db = null;
-			String path = "";
-			try {
-				db = super.getReadableDatabase();
-				path = db.getPath();
-
-			} catch (NullPointerException e) {
-				// do nothing
-			} finally {
-				if (db != null) {
-					db.close();
-				}
-			}
-			if (path.length() > 0) {
-				return path.substring(path.lastIndexOf("/"));
-			} else {
-				return path;
-			}
 		}
 	}
 
@@ -204,7 +179,7 @@ public class Utils extends SQLiteOpenHelper {
 			if (columnNamesForTable.size() != columnDatatypesForTable.size()) {
 				return;
 			}
-			query.append("CREATE TABLE IF NOT EXISTS " + tableName + " ( ");
+			query.append("CREATE TABLE IF NOT EXISTS ").append(tableName).append(" ( ");
 			for (int i = 0; i < columnNamesForTable.size(); i++) {
 				query.append(columnNamesForTable.get(i) + " "
 						+ columnDatatypesForTable.get(i) + ",");
@@ -232,7 +207,7 @@ public class Utils extends SQLiteOpenHelper {
 		Log.d("DBUtil", "at beginning of onUpgrade");
 		String query;
 		for (String tableName : tableNames) {
-			query = "DROP TABLE IF EXISTS " + tableName;
+			query = new StringBuilder().append("DROP TABLE IF EXISTS ").append(tableName).toString();
 			db.execSQL(query);
 		}
 		onCreate(db);
@@ -335,7 +310,7 @@ public class Utils extends SQLiteOpenHelper {
 			final ArrayList<String> columnNamesForTable = getColumnNamesForTable(tableName);
 			final String[] columns = columnNamesForTable
 					.toArray(new String[columnNamesForTable.size()]);
-			String selectQuery = "SELECT * FROM " + tableName;
+			String selectQuery = String.format("SELECT * FROM %s", tableName);
 			SQLiteDatabase database = this.getReadableDatabase();
 			Cursor cursor = database.query(tableName, columns, null, null, "",
 					"", "");
