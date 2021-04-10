@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-
 public class MainActivity extends Activity {
 
     @Override
@@ -31,7 +30,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.bottomright).setOnDragListener(new MyDragListener());
     }
 
-    private final class MyTouchListener implements View.OnTouchListener {
+    private static final class MyTouchListener implements View.OnTouchListener {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("", "");
@@ -63,6 +62,7 @@ public class MainActivity extends Activity {
                     v.setBackgroundDrawable(enterShape);
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
+                case DragEvent.ACTION_DRAG_ENDED:
                     // Going back to Normal focus
                     v.setBackgroundDrawable(normalShape);
                     break;
@@ -83,8 +83,6 @@ public class MainActivity extends Activity {
                     view.setVisibility(View.VISIBLE);
 
                     break;
-                case DragEvent.ACTION_DRAG_ENDED:
-                    v.setBackgroundDrawable(normalShape);
                 default:
                     break;
             }
