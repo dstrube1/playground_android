@@ -18,7 +18,6 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private Spinner spinner;
-    private ArrayAdapter<String> adapter;
     private WifiManager wifiManager;
     private WifiReceiver wifiReceiver;
     private List<ScanResult> wifiList;
@@ -31,7 +30,7 @@ public class MainActivity extends Activity {
 //				spinnerList.add(wifiList.get(i).toString());
                 spinnerList.add(wifiList.get(i).SSID);
             }
-            adapter = new ArrayAdapter<>(MainActivity.this,
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
                     android.R.layout.simple_spinner_item, spinnerList);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
