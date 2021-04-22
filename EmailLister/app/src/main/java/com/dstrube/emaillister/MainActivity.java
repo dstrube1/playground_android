@@ -3,8 +3,8 @@ package com.dstrube.emaillister;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.ArrayAdapter;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PackageManager.PERMISSION_GRANTED){
             //great
             setSpinner();
