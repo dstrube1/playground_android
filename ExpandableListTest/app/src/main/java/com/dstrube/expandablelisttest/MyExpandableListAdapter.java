@@ -17,10 +17,10 @@ import java.util.List;
 
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private Context _context;
-    private List<String> _listDataHeader; // header titles
+    private final Context _context;
+    private final List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
+    private final HashMap<String, List<String>> _listDataChild;
 
     /*package*/ MyExpandableListAdapter(Context context, List<String> listDataHeader,
                                    HashMap<String, List<String>> listChildData) {
