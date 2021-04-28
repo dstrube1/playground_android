@@ -15,10 +15,10 @@ import java.util.List;
  * Created on 6/11/2014.
  */
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
-    private Context mContext;
-    private ExpandableListView mExpandableListView;
-    private List<GroupEntity> mGroupCollection;
-    private int[] groupStatus;
+    private final Context mContext;
+    private final ExpandableListView mExpandableListView;
+    private final List<GroupEntity> mGroupCollection;
+    private final int[] groupStatus;
 
     public MyExpandableListAdapter(Context pContext,
                                    ExpandableListView pExpandableListView,
@@ -129,12 +129,12 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return arg2;
     }
 
-    class GroupHolder {
+    static class GroupHolder {
         ImageView img;
         TextView title;
     }
 
-    class ChildHolder {
+    static class ChildHolder {
         TextView title;
     }
 

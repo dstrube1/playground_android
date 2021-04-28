@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
             ge.Name = "Group" + i;
 
             for (int j = 1; j < 5; j++) {
-                GroupEntity.GroupItemEntity gi = ge.new GroupItemEntity();
+                GroupEntity.GroupItemEntity gi = new GroupEntity.GroupItemEntity();
                 gi.Name = "Child" + j;
                 ge.GroupItemCollection.add(gi);
             }

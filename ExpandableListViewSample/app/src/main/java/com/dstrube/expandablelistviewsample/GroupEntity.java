@@ -15,7 +15,7 @@ public class GroupEntity {
         GroupItemCollection = new ArrayList<>();
     }
 
-    public class GroupItemEntity
+    public static class GroupItemEntity
     {
         public String Name;
     }
