@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class CustomAdapter extends BaseAdapter {
 
     // does this need to be static?
-    private ArrayList<MyFile> list;
-    private LayoutInflater inflater;
+    private final ArrayList<MyFile> list;
+    private final LayoutInflater inflater;
 
     public CustomAdapter(Context context, ArrayList<MyFile> list) {
         this.list = list;
@@ -77,7 +77,7 @@ public class CustomAdapter extends BaseAdapter {
 
     // This is from the CustomListView project
     // static instead of private?
-    private class ViewHolder {
+    private static class ViewHolder {
         TextView txt_fileName;
         TextView txt_filePath;
         TextView txt_fileIsDir;

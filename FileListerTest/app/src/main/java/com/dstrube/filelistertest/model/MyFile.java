@@ -8,13 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MyFile {
-    private String name;
-    private String path;
-    private boolean isDir;
+    private final String name;
+    private final String path;
+    private final boolean isDir;
     private String modifiedDate;
 
     //FileUtil fields
-    private long size;
+    private final long size;
 
     public MyFile() {
         name = "";
