@@ -35,14 +35,14 @@ public class MainActivity extends Activity {
         ArrayList<String> allInternal0 =
                 getFiles(10, Environment.getDataDirectory().toString(), null, null);
         for (String file : allInternal0) {
-            textView.setText(textView.getText() + "\n" + file);
+            textView.setText(String.format("%s\n%s", textView.getText(), file));
         }
 
         ArrayList<String> allExternal0 =
                 getFiles(10, Environment.getExternalStorageDirectory().toString(), null,
                         null);
         for (String file : allExternal0) {
-            textView.setText(textView.getText() + "\n" + file);
+            textView.setText(String.format("%s\n%s", textView.getText(), file));
         }
     }
 
