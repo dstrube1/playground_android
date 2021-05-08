@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class DemoAsyncTask extends AsyncTask<Void, Integer, Void>{
 
-    private DemoInterface _delegate;
+    private final DemoInterface _delegate;
     private static final String TAG = DemoAsyncTask.class.getSimpleName();
 
     public DemoAsyncTask(DemoInterface delegate) {
