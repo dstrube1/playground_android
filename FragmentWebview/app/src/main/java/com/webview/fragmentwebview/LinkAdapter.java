@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 public class LinkAdapter extends ArrayAdapter<LinkData> {
 
-    private Context ctx;
-    private List<LinkData> linkDataList;
+    private final Context ctx;
+    private final List<LinkData> linkDataList;
 
     /*package*/ LinkAdapter(List<LinkData> linkDataList, Context ctx) {
         super(ctx, R.layout.row_layout, linkDataList);

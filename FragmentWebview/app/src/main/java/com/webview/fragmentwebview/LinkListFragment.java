@@ -17,7 +17,7 @@ import android.widget.ListView;
 
 public class LinkListFragment extends Fragment {
 
-    private static List<LinkData> linkDataList = new ArrayList<LinkData>();
+    private static final List<LinkData> linkDataList = new ArrayList<>();
     private LinkAdapter la;
 
     static {

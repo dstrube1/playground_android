@@ -54,7 +54,7 @@ public class WebViewFragment extends Fragment {
 
         }
         
-        private class SwAWebClient extends WebViewClient {
+        private static class SwAWebClient extends WebViewClient {
 
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
