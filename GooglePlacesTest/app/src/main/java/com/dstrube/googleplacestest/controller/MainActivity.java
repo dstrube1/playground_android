@@ -32,7 +32,6 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
     private String[] places;
     private LocationManager locationManager;
     private Location location;
-    private final String SERVER_API_KEY = "AIzaSyC6ih35PA8zgPebleXimXiaiRp58dzJtWk";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +101,7 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
             }
     }
 
-    private LocationListener listener = new LocationListener() {
+    private final LocationListener listener = new LocationListener() {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -144,8 +143,8 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
     private class GetPlaces extends AsyncTask<Void, Void, ArrayList<Place>> {
 
         private ProgressDialog dialog;
-        private Context context;
-        private String places;
+        private final Context context;
+        private final String places;
 
         public GetPlaces(Context context, String places) {
             this.context = context;
@@ -167,6 +166,7 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
          */
         @Override
         protected ArrayList<Place> doInBackground(Void... arg0) {
+            String SERVER_API_KEY = "AIzaSyC6ih35PA8zgPebleXimXiaiRp58dzJtWk";
             PlaceService service = new PlaceService(
                     SERVER_API_KEY);
             ArrayList<Place> findPlaces = service.findPlaces(
