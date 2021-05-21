@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -158,15 +159,10 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         Log.i(TAG, "onMapReady");
         this.googleMap = googleMap;
 
         // check if map is created successfully or not
-        if (googleMap == null) {
-            Toast.makeText(getApplicationContext(),
-                    "Sorry! unable to create maps", Toast.LENGTH_SHORT)
-                    .show();
-        }
     }
 }
