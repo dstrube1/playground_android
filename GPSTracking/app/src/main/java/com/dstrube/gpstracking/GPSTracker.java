@@ -48,7 +48,7 @@ public class GPSTracker extends Service implements LocationListener {
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
 	// The minimum time between updates in milliseconds
-	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+	private static final long MIN_TIME_BW_UPDATES = 1000 * 60;
 	// 1 minute = 60,000 milliseconds
 
 	// Declaring a Location Manager
@@ -314,8 +314,6 @@ public class GPSTracker extends Service implements LocationListener {
 			}else{
 				Toast.makeText(mContext, "Geocoder is not present.", Toast.LENGTH_LONG).show();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

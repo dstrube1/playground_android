@@ -1,6 +1,7 @@
 package com.dstrube.gpstracking;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 //import android.view.LayoutInflater;
 //import android.view.View;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 //import com.google.android.gms.maps.CameraUpdateFactory;
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -18,11 +21,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 //////////////////
-/* 
-* AndroidGPSTracking
-* This app was originally sample code illustrating just the lat /lng -> geocoder function.
-* I've since commented all that out, and used this app for an API key testing some Google Map functions.
-*/
+/*
+ * AndroidGPSTracking
+ * This app was originally sample code illustrating just the lat /lng -> geocoder function.
+ * I've since commented all that out, and used this app for an API key testing some Google Map functions.
+ */
 //////////////////
 
 //http://www.androidhive.info/2013/08/android-working-with-google-maps-v2/
@@ -44,7 +47,7 @@ public class AndroidGPSTrackingActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 
 		// if (savedInstanceState == null) {
 		// getFragmentManager().beginTransaction()
@@ -67,7 +70,7 @@ public class AndroidGPSTrackingActivity extends Activity {
 		if (map == null) {
 			MapFragment mapFragment = (MapFragment) getFragmentManager()
 					.findFragmentById(R.id.map);
-			map = mapFragment.getMap();
+			mapFragment.getMapAsync(null);
 
 			if (map == null) {
 				Toast.makeText(getApplicationContext(), "Sorry, no can do.",
@@ -111,11 +114,24 @@ public class AndroidGPSTrackingActivity extends Activity {
 			//map type none?
 //			map.setMapType(GoogleMap.MAP_TYPE_NONE);
 			//really means no map O_o
-		
+
 			//use this when installed on phone, not on emulator:
 //			map.getUiSettings().setZoomControlsEnabled(false);
-			
+
 			//doesn't work on emulator?
+			if (ActivityCompat.checkSelfPermission(this,
+					android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+				&& ActivityCompat.checkSelfPermission(this,
+					android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+				// TODO: Consider calling
+				//    ActivityCompat#requestPermissions
+				// here to request the missing permissions, and then overriding
+				//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+				//                                          int[] grantResults)
+				// to handle the case where the user grants the permission. See the documentation
+				// for ActivityCompat#requestPermissions for more details.
+				return;
+			}
 			map.setMyLocationEnabled(true);
 			
 			//showing / hiding works, but not sure about the functionality
@@ -171,7 +187,7 @@ public class AndroidGPSTrackingActivity extends Activity {
 	// }
 	// }
 
-	/**
+	/*
 	 * A placeholder fragment containing a simple view.
 	 */
 	// public static class PlaceholderFragment extends MapFragment {
