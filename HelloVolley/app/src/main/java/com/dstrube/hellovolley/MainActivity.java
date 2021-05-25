@@ -33,7 +33,6 @@ public class MainActivity extends Activity {
     private RequestQueue queue;
 
     public static final String TAG = MainActivity.class.getName();
-    private UserModel userModel;
     private TextView mTextView;
 
     @Override
@@ -44,7 +43,7 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        userModel = new UserModel();
+        UserModel userModel = new UserModel();
 
 //        userModel.userLiveData.observe(new LifecycleOwner() {
 //            @NonNull

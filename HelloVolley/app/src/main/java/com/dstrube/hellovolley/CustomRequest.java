@@ -19,8 +19,8 @@ public class CustomRequest extends Request<JSONObject> {
     //Ending up not needing this because the error I was getting, buried in the error object, was a status code of 301 (due to an out of date url, using http instead of https)
     //This new class doesn't help with that.
 
-    private Listener<JSONObject> listener;
-    private Map<String, String> params;
+    private final Listener<JSONObject> listener;
+    private final Map<String, String> params;
 
     public CustomRequest(String url, Map<String, String> params,
                          Listener<JSONObject> responseListener, ErrorListener errorListener) {
@@ -48,10 +48,8 @@ public class CustomRequest extends Request<JSONObject> {
                     HttpHeaderParser.parseCharset(response.headers));
             return Response.success(new JSONObject(jsonString),
                     HttpHeaderParser.parseCacheHeaders(response));
-        } catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException | JSONException e) {
             return Response.error(new ParseError(e));
-        } catch (JSONException je) {
-            return Response.error(new ParseError(je));
         }
     }
 

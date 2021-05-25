@@ -1,3 +1,5 @@
+package com.dstrube.hellovolley.util;
+
 import android.util.Log;
 
 //This makes logging a little easier.
