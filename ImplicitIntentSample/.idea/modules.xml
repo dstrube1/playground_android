@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ImplicitIntentSample.iml" filepath="$PROJECT_DIR$/ImplicitIntentSample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ImplicitIntentSample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ImplicitIntentSample.app.iml" />
     </modules>
   </component>
 </project>
