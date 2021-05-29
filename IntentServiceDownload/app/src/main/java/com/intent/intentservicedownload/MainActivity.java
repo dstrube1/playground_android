@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	private TextView textView;
 	
-	  private BroadcastReceiver receiver = new BroadcastReceiver() {
+	  private final BroadcastReceiver receiver = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
 	      Bundle bundle = intent.getExtras();
