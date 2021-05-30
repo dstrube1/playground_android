@@ -23,7 +23,6 @@ import android.os.ResultReceiver;
 
 public class DownloadService extends IntentService {
 
-	private int result = Activity.RESULT_CANCELED;
 	public static final String URL = "urlpath";
 	public static final String FILENAME = "filename";
 	public static final String FILEPATH = "filepath";
@@ -108,7 +107,7 @@ public class DownloadService extends IntentService {
 		}
 
 		// Successful finished
-		result = Activity.RESULT_OK;
+		int result = Activity.RESULT_OK;
 
 		// http://stackoverflow.com/questions/3528735/failed-binder-transaction
 		// bitmap = scaleDownBitmap(bitmap, 100, getApplicationContext());
