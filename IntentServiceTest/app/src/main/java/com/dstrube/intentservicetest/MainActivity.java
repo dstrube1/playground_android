@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     // private MyBroadcastReceiver receiver;
     private TextView textView;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -114,9 +114,8 @@ public class MainActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container,
+            return inflater.inflate(R.layout.fragment_main, container,
                     false);
-            return rootView;
         }
     }
 
