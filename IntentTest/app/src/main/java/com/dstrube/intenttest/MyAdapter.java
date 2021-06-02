@@ -12,14 +12,12 @@ import java.util.ArrayList;
 
 public class MyAdapter extends BaseAdapter {
 
-    private Activity activity;
-    private ArrayList<Employee_P> data;
+    private final ArrayList<Employee_P> data;
     private static LayoutInflater inflater = null;
 
     public MyAdapter(Activity a, ArrayList<Employee_P> d) {
-        activity = a;
         data=d;
-        inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class ReportActivity extends Activity {
         // create the grid item mapping
         String[] from = new String[] {"rowid", "name", "mail", "phone"};
         int[] to = new int[] { R.id.item1, R.id.item2, R.id.item3, R.id.item4 };
-        ArrayList emp1 =  getIntent().getParcelableArrayListExtra("james");
+        final ArrayList<?> emp1 =  getIntent().getParcelableArrayListExtra("james");
         // prepare the list of all records
         List<HashMap<String, String>> fillMaps = new ArrayList<>();
 
