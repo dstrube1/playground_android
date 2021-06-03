@@ -11,7 +11,6 @@ import android.widget.Toast;
 public class JokeWidgetReceiver extends BroadcastReceiver {
 
     public static int clickCount = 0;
-    private String msg[] = null;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -45,7 +44,7 @@ public class JokeWidgetReceiver extends BroadcastReceiver {
 
     private String getDesc(Context context) {
         // some static jokes from xml
-        msg = context.getResources().getStringArray(R.array.jokes);
+        String[] msg = context.getResources().getStringArray(R.array.jokes);
         if (clickCount >= msg.length) {
             clickCount = 0;
         }
