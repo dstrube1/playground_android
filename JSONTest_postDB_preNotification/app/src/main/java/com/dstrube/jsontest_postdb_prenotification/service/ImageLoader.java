@@ -30,7 +30,7 @@ import android.widget.ImageView;
 public class ImageLoader {
 	MemoryCache memoryCache = new MemoryCache();
 	FileCache fileCache;
-	private Map<ImageView, String> imageViews = Collections
+	private final Map<ImageView, String> imageViews = Collections
 			.synchronizedMap(new WeakHashMap<ImageView, String>());
 	ExecutorService executorService;
 
@@ -109,7 +109,7 @@ public class ImageLoader {
 					break;
 				os.write(bytes, 0, count);
 			}
-		} catch (Exception ex) {
+		} catch (Exception ignored) {
 		}
 	}
 
@@ -148,7 +148,7 @@ public class ImageLoader {
 	}
 
 	// Task for the queue
-	private class PhotoToLoad {
+	private static class PhotoToLoad {
 		public String url;
 		public ImageView imageView;
 

@@ -13,7 +13,7 @@ import android.content.Context;
  */
 public class FileCache {
 
-	private File cacheDir;
+	private final File cacheDir;
 
 	/**
 	 * Constructor
@@ -44,8 +44,7 @@ public class FileCache {
 		String filename = String.valueOf(url.hashCode());
 		// Another possible solution (thanks to grantland)
 		// String filename = URLEncoder.encode(url);
-		File f = new File(cacheDir, filename);
-		return f;
+		return new File(cacheDir, filename);
 
 	}
 

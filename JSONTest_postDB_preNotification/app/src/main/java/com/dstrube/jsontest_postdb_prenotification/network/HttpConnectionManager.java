@@ -43,7 +43,7 @@ public class HttpConnectionManager extends HttpConnection {
 			HttpEntity httpEntity = httpResponse.getEntity();
 			inStream = httpEntity.getContent();
 
-		} catch (final UnsupportedEncodingException e) {
+		} catch (final IOException e) {
 			// e.printStackTrace();
 			parent.runOnUiThread(new Runnable() {
 				public void run() {
@@ -51,18 +51,6 @@ public class HttpConnectionManager extends HttpConnection {
 				}
 			});
 
-		} catch (final ClientProtocolException e) {
-            parent.runOnUiThread(new Runnable() {
-                public void run() {
-                    Toast.makeText(ctx, e.toString(), Toast.LENGTH_LONG).show();
-                }
-            });
-		} catch (final IOException e) {
-            parent.runOnUiThread(new Runnable() {
-                public void run() {
-                    Toast.makeText(ctx, e.toString(), Toast.LENGTH_LONG).show();
-                }
-            });
 		}
 
 		//Taking from stream to reader, and from reader to string
@@ -72,7 +60,7 @@ public class HttpConnectionManager extends HttpConnection {
 			StringBuilder sb = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				sb.append(line + "\n");
+				sb.append(line).append("\n");
 			}
 			inStream.close();
 			content = sb.toString();

@@ -18,7 +18,7 @@ public class DBController extends SQLiteOpenHelper {
 
 	/**
 	 * Constructor
-	 * @param context
+	 * @param context context
 	 */
 	public DBController(Context context) {
 		super(context, "androidsqlite.db", null, 1);
@@ -49,7 +49,7 @@ public class DBController extends SQLiteOpenHelper {
 
 	/**
 	 * Insert row
-	 * @param queryValues
+	 * @param queryValues query values
 	 */
 	public void insertEmployee(HashMap<String, String> queryValues) {
 		SQLiteDatabase database = this.getWritableDatabase();
@@ -80,8 +80,8 @@ public class DBController extends SQLiteOpenHelper {
 
 	/**
 	 * Update row
-	 * @param queryValues
-	 * @return
+	 * @param queryValues query values
+	 * @return the number of rows affected
 	 */
 	public int updateEmployee(HashMap<String, String> queryValues) {
 		SQLiteDatabase database = this.getWritableDatabase();
@@ -105,7 +105,7 @@ public class DBController extends SQLiteOpenHelper {
 	
 	/**
 	 * Delete row
-	 * @param id
+	 * @param id id
 	 */
 	public void deleteEmployee(String id) {
 	    
@@ -116,7 +116,7 @@ public class DBController extends SQLiteOpenHelper {
 	
 	/**
 	 * Select * from employee
-	 * @return
+	 * @return list of employees
 	 */
 	public ArrayList<HashMap<String, String>> getAllEmployees() {
 	    ArrayList<HashMap<String, String>> wordList;
@@ -149,8 +149,8 @@ public class DBController extends SQLiteOpenHelper {
 	 
 	/**
 	 * Select * from employee where employeeid=id
-	 * @param id
-	 * @return
+	 * @param id id
+	 * @return employee info
 	 */
 	  public HashMap<String, String> getEmployeeInfo(String id) {
 	    HashMap<String, String> wordList = new HashMap<String, String>();

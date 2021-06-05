@@ -12,10 +12,10 @@ public class Employee implements Parcelable {
 
 	private static final String CREATOR = "";
 
-	private String name;
-	private String email;
-	private String title;
-	private String thumbUrl;
+	private final String name;
+	private final String email;
+	private final String title;
+	private final String thumbUrl;
 	
 	public Employee(){
 		name="";

@@ -16,8 +16,6 @@ import android.widget.Toast;
  */
 public class JSONParser {
 
-//	private JSONObject jObj = null;
-	private String jsonString = "";
 	private String URL = "";
 	
 	//Constructor
@@ -44,7 +42,8 @@ public class JSONParser {
 		JSONArray jarray = null;
 		
 		// Making HTTP request
-		jsonString = HttpConnectionManager.Get(URL, ctx, parent);
+		//	private JSONObject jObj = null;
+		String jsonString = HttpConnectionManager.Get(URL, ctx, parent);
 		
 		// try parse the string to a JSON object
 		try {

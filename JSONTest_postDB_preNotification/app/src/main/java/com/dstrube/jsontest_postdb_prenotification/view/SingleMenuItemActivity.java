@@ -10,12 +10,6 @@ import android.widget.TextView;
 //This class represents the activity that is displayed when clicking on a single item from the list
 public class SingleMenuItemActivity extends Activity {
 
-	// JSON node keys
-	private final String TAG_FIRSTNAME = "firstName";
-	private final String TAG_LASTNAME = "lastName";
-	private final String TAG_EMAIL = "email";
-	private final String TAG_TITLE = "title";
-	
 	/**
 	 * Default beginner
 	 * Set things up
@@ -30,11 +24,16 @@ public class SingleMenuItemActivity extends Activity {
         Intent intent = getIntent();
         
         // Get JSON values from previous intent
-        String firstName = intent.getStringExtra(TAG_FIRSTNAME);
-        String lastName = intent.getStringExtra(TAG_LASTNAME);
+		// JSON node keys
+		String TAG_FIRSTNAME = "firstName";
+		String firstName = intent.getStringExtra(TAG_FIRSTNAME);
+		String TAG_LASTNAME = "lastName";
+		String lastName = intent.getStringExtra(TAG_LASTNAME);
         String name = firstName + " " + lastName;
-        String email = intent.getStringExtra(TAG_EMAIL);
-        String title = intent.getStringExtra(TAG_TITLE);
+		String TAG_EMAIL = "email";
+		String email = intent.getStringExtra(TAG_EMAIL);
+		String TAG_TITLE = "title";
+		String title = intent.getStringExtra(TAG_TITLE);
         
         // Displaying all values on the screen
         TextView lblName = findViewById(R.id.name_label);

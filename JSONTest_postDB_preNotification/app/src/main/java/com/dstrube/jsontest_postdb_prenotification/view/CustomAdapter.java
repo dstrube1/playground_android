@@ -26,11 +26,10 @@ import com.dstrube.jsontest_postdb_prenotification.service.ImageLoader;
 //This is the adapter for the list view
 public class CustomAdapter extends SimpleAdapter {
 
-    private ArrayList<HashMap<String, String>> mData;
+    private final ArrayList<HashMap<String, String>> mData;
     // private int mViewResourceId;
 
-    private Context ctx;
-    private LayoutInflater mInflater;
+    private final LayoutInflater mInflater;
 
     // Constructor
     // Warning suppressed for the data conversion from List to ArrayList
@@ -39,8 +38,7 @@ public class CustomAdapter extends SimpleAdapter {
                          int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
         // mViewResourceId = resource;
-        ctx = context;
-        mInflater = (LayoutInflater) ctx
+        mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mData = (ArrayList<HashMap<String, String>>) data;
     }
