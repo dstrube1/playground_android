@@ -21,9 +21,6 @@ import android.widget.TextView;
 
 public class MainActivity extends ListActivity {
 
-	// url to make request
-	private static String url = "https://api.androidhive.info/contacts/";
-	
 	// JSON Node names
 	private static final String TAG_CONTACTS = "contacts";
 	private static final String TAG_ID = "id";
@@ -145,6 +142,8 @@ public class MainActivity extends ListActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
+			// url to make request
+			String url = "https://api.androidhive.info/contacts/";
 			json = jParser.getJSONFromUrl(url);
 
 			return null;
