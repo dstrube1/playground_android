@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
     			return;
     		}
     	}
+    	//2021-06-06: no longer available; must find another URL for an mp4
     	video.setVideoURI(Uri.parse("http://download.itcuties.com/teaser/itcuties-teaser-480.mp4"));
     	video.setMediaController(new MediaController(this));
     	video.requestFocus();
@@ -77,8 +78,7 @@ public class MainActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_main, container, false);
         }
     }
 
