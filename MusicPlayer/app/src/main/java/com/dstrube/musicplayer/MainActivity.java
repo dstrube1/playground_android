@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
     /**
      * ServiceConnection for the bound music service
      */
-    private ServiceConnection mConnection = new ServiceConnection() {
+    private final ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder binder) {
 
             musicServiceBound = ((MusicServiceBound.LocalBinder) binder)
@@ -178,9 +178,8 @@ public class MainActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container,
+            return inflater.inflate(R.layout.fragment_main, container,
                     false);
-            return rootView;
         }
     }
 

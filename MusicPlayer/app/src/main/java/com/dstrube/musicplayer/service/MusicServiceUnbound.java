@@ -63,7 +63,7 @@ public class MusicServiceUnbound extends Service {
      *
      * @author david.strube
      */
-    private class MediaPlayerPreparedListener implements OnPreparedListener {
+    private static class MediaPlayerPreparedListener implements OnPreparedListener {
 
         @Override
         public void onPrepared(MediaPlayer mp) {

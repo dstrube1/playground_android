@@ -77,7 +77,7 @@ public class MusicServiceBound extends Service {
     /**
      * This is what happens when the MediaPlayer is ready to play
      */
-    private class MediaPlayerPreparedListener implements OnPreparedListener {
+    private static class MediaPlayerPreparedListener implements OnPreparedListener {
 
         @Override
         public void onPrepared(MediaPlayer mp) {
