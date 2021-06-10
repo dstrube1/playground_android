@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 
 public class AlbumViewAdapter extends BaseAdapter {
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 //    private TypedArray albumImages;
 //    private String[] albumNames;
 //    private String[] songNames;
@@ -41,7 +41,6 @@ public class AlbumViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row = inflater.inflate(R.layout.album_view, parent, false);
-        return row;
+        return inflater.inflate(R.layout.album_view, parent, false);
     }
 }
