@@ -3,8 +3,8 @@ package com.dstrube.navigationspinnertest;
 import android.widget.ImageView;
 
 public class SpinnerItem {
-	private String title;
-	private ImageView image;
+	private final String title;
+	private final ImageView image;
 
 	public SpinnerItem() {
 		title = "";

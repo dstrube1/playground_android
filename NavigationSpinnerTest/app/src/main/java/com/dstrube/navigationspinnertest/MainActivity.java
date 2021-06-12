@@ -116,11 +116,6 @@ public class MainActivity extends Activity implements
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static TimePicker timePicker;
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         /**
@@ -158,7 +153,11 @@ public class MainActivity extends Activity implements
 
         private void section1(ViewGroup container) {
             container.removeAllViews();
-            timePicker = new TimePicker(container.getContext());
+            /**
+             * The fragment argument representing the section number for this
+             * fragment.
+             */
+            TimePicker timePicker = new TimePicker(container.getContext());
             container.addView(timePicker);
 
         }
