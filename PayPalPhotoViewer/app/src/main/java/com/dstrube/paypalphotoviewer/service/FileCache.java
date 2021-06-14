@@ -12,12 +12,12 @@ import android.content.Context;
  * (Copied from Nirmal Thakur)
  */
 public class FileCache {
-	private File cacheDir;
+	private final File cacheDir;
 
 	/**
 	 * Constructor
 	 * 
-	 * @param context
+	 * @param context context
 	 */
 	public FileCache(Context context) {
 		// Find the dir to save cached images
@@ -40,8 +40,8 @@ public class FileCache {
 
 	/**
 	 * Given a url, get the file
-	 * @param url
-	 * @return
+	 * @param url url
+	 * @return file
 	 */
 	public File getFile(String url) {
 		// I identify images by hashcode. Not a perfect solution, good for the

@@ -25,16 +25,16 @@ import android.widget.ImageView;
 public class ImageLoader {
 
     private final MemoryCache memoryCache = new MemoryCache();
-    private FileCache fileCache;
-    private Map<ImageView, String> imageViews = Collections
+    private final FileCache fileCache;
+    private final Map<ImageView, String> imageViews = Collections
             .synchronizedMap(new WeakHashMap<ImageView, String>());
-    private ExecutorService executorService;
+    private final ExecutorService executorService;
     private final int stub_id = R.drawable.blank;
 
     /**
      * Constuctor
      *
-     * @param context
+     * @param context context
      */
     public ImageLoader(Context context) {
         fileCache = new FileCache(context);
@@ -93,8 +93,8 @@ public class ImageLoader {
     /**
      * Copy from inputStream to outputStream using buffer of byte array
      *
-     * @param is
-     * @param os
+     * @param is InputStream
+     * @param os OutputStream
      */
     public void copyStream(InputStream is, OutputStream os) {
         final int buffer_size = 1024;
@@ -106,15 +106,15 @@ public class ImageLoader {
                     break;
                 os.write(bytes, 0, count);
             }
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
     }
 
     /**
      * Gets bitmap from url
      *
-     * @param url
-     * @return
+     * @param url url
+     * @return Bitmap
      */
     private Bitmap getBitmap(String url) {
         File f = fileCache.getFile(url);
@@ -146,7 +146,7 @@ public class ImageLoader {
     }
 
     // Task for the queue
-    private class PhotoToLoad {
+    private static class PhotoToLoad {
         public String url;
         public ImageView imageView;
 
@@ -191,8 +191,8 @@ public class ImageLoader {
     /**
      * Puts the image in the queue for the executor service to download
      *
-     * @param url
-     * @param imageView
+     * @param url url
+     * @param imageView ImageView
      */
     private void queuePhoto(String url, ImageView imageView) {
         PhotoToLoad p = new PhotoToLoad(url, imageView);
@@ -202,8 +202,8 @@ public class ImageLoader {
     /**
      * The beginning of logic for downloading and displaying the image using all other functions.
      *
-     * @param url
-     * @param imageView
+     * @param url url
+     * @param imageView ImageView
      */
     public void DisplayImage(String url, ImageView imageView) {
 //			System.out.println("DisplayImage begin; url="+url);

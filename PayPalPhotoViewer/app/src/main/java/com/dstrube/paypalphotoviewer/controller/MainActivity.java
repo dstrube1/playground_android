@@ -174,9 +174,8 @@ public class MainActivity extends Activity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			return inflater.inflate(R.layout.fragment_main, container,
 					false);
-			return rootView;
 		}
 	}
 

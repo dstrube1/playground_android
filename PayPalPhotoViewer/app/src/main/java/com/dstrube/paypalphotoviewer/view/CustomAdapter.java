@@ -24,8 +24,8 @@ import android.widget.ImageView;
 
 public class CustomAdapter extends BaseAdapter {
 
-	private ArrayList<PhotoRowObject> images;
-	private LayoutInflater inflater;
+	private final ArrayList<PhotoRowObject> images;
+	private final LayoutInflater inflater;
 
 	public CustomAdapter(Context context, ArrayList<PhotoRowObject> images) {
 		this.images = images;
@@ -114,7 +114,7 @@ public class CustomAdapter extends BaseAdapter {
 	}
 	*/
 
-	private class ViewHolder {
+	private static class ViewHolder {
 		ImageView image1;
 //		ImageView image2;
 	}
