@@ -212,7 +212,7 @@ public class Randomizer {
                 if (responseCode == HttpsURLConnection.HTTP_OK) {
                     BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                     String inputLine;
-                    StringBuffer response = new StringBuffer();
+                    StringBuilder response = new StringBuilder();
 
                     while ((inputLine = in.readLine()) != null) {
                         mRandoms.add(Integer.parseInt(inputLine));

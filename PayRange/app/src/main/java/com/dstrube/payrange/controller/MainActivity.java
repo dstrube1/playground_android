@@ -2,15 +2,17 @@ package com.dstrube.payrange.controller;
 
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * The {@link PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     * {@link FragmentStatePagerAdapter}.
      */
     private static SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -201,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView averageStrengthsTextView = rootView.findViewById(R.id.average_strength);
                 stringBuilder = new StringBuilder();
                 stringBuilder.append(averageStrengthsTextView.getText());
+                assert vendingMachine != null;
                 stringBuilder.append(vendingMachine.getAverageBleStrength());
                 averageStrengthsTextView.setText(stringBuilder.toString());
                 if (vendingMachine.getAverageBleStrength() < POOR_SIGNAL_THRESHOLD)
@@ -219,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public static class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private final String TAG = SectionsPagerAdapter.class.getSimpleName();
         public SectionsPagerAdapter(final FragmentManager fm) {
