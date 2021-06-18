@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 public class CustomAdapter extends SimpleAdapter {
 
-	private ArrayList<HashMap<String, String>> data;
-	private Context context;
-	private LayoutInflater inflater;
+	private final ArrayList<HashMap<String, String>> data;
+	private final Context context;
+	private final LayoutInflater inflater;
 
 	@SuppressWarnings("unchecked")
 	public CustomAdapter(Context context, List<? extends Map<String, ?>> data,

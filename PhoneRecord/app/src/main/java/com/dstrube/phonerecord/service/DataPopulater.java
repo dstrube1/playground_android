@@ -8,8 +8,8 @@ import com.dstrube.phonerecord.R;
 import com.dstrube.phonerecord.controller.DBController;
 
 public class DataPopulater {
-	private DBController dbController;
-	private Context context;
+	private final DBController dbController;
+	private final Context context;
 
 	public DataPopulater(
 			DBController dbController, Context context) {

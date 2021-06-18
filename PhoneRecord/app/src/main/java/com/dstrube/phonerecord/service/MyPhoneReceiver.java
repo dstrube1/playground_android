@@ -61,8 +61,7 @@ public class MyPhoneReceiver extends BroadcastReceiver {
 	@SuppressLint("SimpleDateFormat")
 	private String getDateTime() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		String now = dateFormat.format(Calendar.getInstance().getTime());
-		return now;
+		return dateFormat.format(Calendar.getInstance().getTime());
 	}
 
 	private String getLat(Context context) {

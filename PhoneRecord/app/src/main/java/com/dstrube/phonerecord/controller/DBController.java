@@ -15,8 +15,8 @@ public class DBController extends SQLiteOpenHelper {
 
 	// table name
 	private final String TABLE_NAME = "phoneRecord";
-	private String[] columnNames;
-	private HashMap<String, String> columns = new HashMap<String, String>();
+	private final String[] columnNames;
+	private final HashMap<String, String> columns = new HashMap<String, String>();
 
 	/**
 	 * Constructor

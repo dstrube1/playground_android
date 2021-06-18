@@ -126,6 +126,7 @@ public class GPSTracker extends Service implements LocationListener {
 				// if GPS Enabled get lat/long using GPS Services
 				if (isGPSEnabled) {
 					if (location == null) {
+						assert locationManager != null;
 						locationManager.requestLocationUpdates(
 								LocationManager.GPS_PROVIDER,
 								MIN_TIME_BW_UPDATES,
@@ -322,8 +323,6 @@ public class GPSTracker extends Service implements LocationListener {
 			}else{
 				Toast.makeText(mContext, "Geocoder is not present.", Toast.LENGTH_LONG).show();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

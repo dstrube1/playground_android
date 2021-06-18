@@ -16,18 +16,16 @@ import android.os.Bundle;
 
 public class MainActivity extends ListActivity {
 
-	private DBController dbController;
 	private DataPopulater populater;
 	private ArrayList<HashMap<String, String>> list;
 	private CustomAdapter adapter;
-	private BroadcastReceiver intentReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		dbController = new DBController(this);
+		DBController dbController = new DBController(this);
 
 		populater = new DataPopulater(dbController, getApplicationContext());
 
@@ -58,7 +56,7 @@ public class MainActivity extends ListActivity {
 
 		IntentFilter intentFilter = new IntentFilter("PhoneRecord.intent.MAIN");
 
-		intentReceiver = new BroadcastReceiver() {
+		BroadcastReceiver intentReceiver = new BroadcastReceiver() {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
