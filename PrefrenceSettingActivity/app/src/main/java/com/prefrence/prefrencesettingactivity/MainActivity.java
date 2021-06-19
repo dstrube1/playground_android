@@ -28,13 +28,9 @@ public class MainActivity extends Activity {
  
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
- 
-        case R.id.menu_settings:
+        if (item.getItemId() == R.id.menu_settings) {
             Intent i = new Intent(this, UserSettingActivity.class);
             startActivityForResult(i, RESULT_SETTINGS);
-            break;
- 
         }
  
         return true;
@@ -43,12 +39,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
- 
-        switch (requestCode) {
-        case RESULT_SETTINGS:
+
+        if (requestCode == RESULT_SETTINGS) {
             showUserSettings();
-            break;
- 
         }
  
     }
@@ -58,8 +51,7 @@ public class MainActivity extends Activity {
  
         StringBuilder builder = new StringBuilder();
  
-        builder.append("\n Username: "
-                + sharedPrefs.getString("prefUsername", "NULL"));
+        builder.append("\n Username: ").append(sharedPrefs.getString("prefUsername", "NULL"));
  
         builder.append("\n Send report:"
                 + sharedPrefs.getBoolean("prefSendReport", false));
