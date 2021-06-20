@@ -29,7 +29,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void launchRingDialog(View view) {
-		final ProgressDialog ringProgressDialog = ProgressDialog.show(MainActivity.this, "Please wait ...",	"Downloading Image ...", true);
+		final ProgressDialog ringProgressDialog = ProgressDialog.show(MainActivity.this,
+				"Please wait ...",	"Downloading Image ...", true);
 		ringProgressDialog.setCancelable(true);
 		
 		new Thread(new Runnable() {
