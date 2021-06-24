@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SendEmail.iml" filepath="$PROJECT_DIR$/SendEmail.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SendEmail.iml" filepath="$PROJECT_DIR$/.idea/modules/SendEmail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SendEmail.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SendEmail.app.iml" />
     </modules>
   </component>
 </project>
