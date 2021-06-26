@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 30
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.example.servicecommunication"
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 30
     }
 
     buildTypes {
@@ -19,5 +19,5 @@ android {
 }
 
 dependencies {
-    api 'com.android.support:support-v4:27.1.1'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
 }

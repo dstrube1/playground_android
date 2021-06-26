@@ -48,7 +48,7 @@ public class MainActivity extends ListActivity {
 		unbindService(mConnection);
 	}
 
-	private ServiceConnection mConnection = new ServiceConnection() {
+	private final ServiceConnection mConnection = new ServiceConnection() {
 
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			localWorldService = ((LocalWordService.MyBinder) binder).getService();
