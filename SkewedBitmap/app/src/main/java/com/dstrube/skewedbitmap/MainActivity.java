@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private static final Float[] floatScale = {0.2F, 0.5F, 1F, 2F, 5F};
     private final int defaultSpinnerScaleSelection = 2;
 
-    private ArrayAdapter<String> adapterScale;
-
     private float curScale = 1F;
     private float curRotate = 0F;
     private float curSkewX = 0F;
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         textSkewX = findViewById(R.id.textskewx);
         textSkewY = findViewById(R.id.textskewy);
 
-        adapterScale = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, strScale);
+        ArrayAdapter<String> adapterScale = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, strScale);
         adapterScale.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerScale.setAdapter(adapterScale);
         spinnerScale.setSelection(defaultSpinnerScaleSelection);
@@ -150,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     //region Override Seekbar Methods
 
-    private SeekBar.OnSeekBarChangeListener seekbarSkewYSeekBarChangeListener
+    private final SeekBar.OnSeekBarChangeListener seekbarSkewYSeekBarChangeListener
             = new SeekBar.OnSeekBarChangeListener() {
 
         @Override
@@ -170,12 +168,12 @@ public class MainActivity extends AppCompatActivity {
                                       boolean fromUser) {
             // TODO Auto-generated method stub
             curSkewY = (float)(progress-100)/100;
-            textSkewY.setText("Skew-Y: " + String.valueOf(curSkewY));
+            textSkewY.setText("Skew-Y: " + curSkewY);
             drawMatrix();
         }
     };
 
-    private SeekBar.OnSeekBarChangeListener seekbarSkewXSeekBarChangeListener
+    private final SeekBar.OnSeekBarChangeListener seekbarSkewXSeekBarChangeListener
             = new SeekBar.OnSeekBarChangeListener(){
 
         @Override
@@ -183,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                                       boolean fromUser) {
             // TODO Auto-generated method stub
             curSkewX = (float)(progress-100)/100;
-            textSkewX.setText("Skew-X: " + String.valueOf(curSkewX));
+            textSkewX.setText("Skew-X: " + curSkewX);
             drawMatrix();
         }
 
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private SeekBar.OnSeekBarChangeListener seekbarRotateSeekBarChangeListener
+    private final SeekBar.OnSeekBarChangeListener seekbarRotateSeekBarChangeListener
             = new SeekBar.OnSeekBarChangeListener(){
 
         @Override
@@ -219,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private Spinner.OnItemSelectedListener spinnerScaleOnItemSelectedListener
+    private final Spinner.OnItemSelectedListener spinnerScaleOnItemSelectedListener
             = new Spinner.OnItemSelectedListener(){
 
         @Override
