@@ -19,7 +19,7 @@ public class SmsReceiverListActivity extends ListActivity {
 
 	private BroadcastReceiver mIntentReceiver;
 	private SimpleAdapter listAdapter ;
-	private ArrayList<Map<String, String>> list = new ArrayList<>() ;
+	private final ArrayList<Map<String, String>> list = new ArrayList<>() ;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
