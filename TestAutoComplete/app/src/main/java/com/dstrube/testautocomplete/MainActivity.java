@@ -1,6 +1,6 @@
 package com.dstrube.testautocomplete;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -27,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             super.onResume();
             AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextView1);
-            ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_item, array);
+            
+            @SuppressWarnings({"RawTypeCanBeGeneric", "rawtypes"})
+            ArrayAdapter adapter = new ArrayAdapter<>(this,
+                    android.R.layout.select_dialog_item, array);
             autoCompleteTextView.setThreshold(1);
             autoCompleteTextView.setAdapter(adapter);
         } catch (Exception e) {
