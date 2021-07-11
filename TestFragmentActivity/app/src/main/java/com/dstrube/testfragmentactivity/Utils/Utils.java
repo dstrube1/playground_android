@@ -12,6 +12,7 @@ public class Utils {
         stringBuilder.append(method.getName());
         stringBuilder.append("(");
         boolean first = true;
+        //noinspection rawtypes
         for (Class c : method.getParameterTypes()){
             if (!first) stringBuilder.append(", ");
             first = false;

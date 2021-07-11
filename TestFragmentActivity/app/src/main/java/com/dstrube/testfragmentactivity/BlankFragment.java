@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.dstrube.testfragmentactivity.Utils.Utils;
+
+import java.util.Objects;
 
 
 /**
@@ -42,13 +44,15 @@ public class BlankFragment extends Fragment {
         // Required empty <strikethrough>public</strikethrough> constructor
         //This breaks the app without a try catch:
         try {
-            Log.i(TAG, "Constructor method: "+Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+            Log.i(TAG, "Constructor method: "+Utils.methodLogString(Objects.requireNonNull(new Object() {
+            }.getClass().getEnclosingMethod())));
         }catch (Exception e)
         {
             Log.d(TAG, e.getMessage());
             //Attempt to invoke virtual method 'java.lang.String java.lang.reflect.Method.getName()' on a null object reference
         }
-        Log.i(TAG, "Constructor name:"+ new Object(){}.getClass().getEnclosingConstructor().getName());
+        Log.i(TAG, "Constructor name:"+ Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingConstructor()).getName());
         //getEnclosingConstructor().getName == TAG
     }
 
@@ -62,7 +66,8 @@ public class BlankFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static BlankFragment newInstance(String param1, String param2) {
-        Log.i(TAG, Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+        Log.i(TAG, Utils.methodLogString(Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingMethod())));
         BlankFragment fragment = new BlankFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
@@ -74,7 +79,8 @@ public class BlankFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.i(TAG, Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+        Log.i(TAG, Utils.methodLogString(Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingMethod())));
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -86,7 +92,8 @@ public class BlankFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+        Log.i(TAG, Utils.methodLogString(Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingMethod())));
         if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -96,7 +103,8 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i(TAG, Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+        Log.i(TAG, Utils.methodLogString(Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingMethod())));
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_blank, container, false);
     }
@@ -104,19 +112,22 @@ public class BlankFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.i(TAG, Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+        Log.i(TAG, Utils.methodLogString(Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingMethod())));
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Log.i(TAG, Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+        Log.i(TAG, Utils.methodLogString(Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingMethod())));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG, Utils.methodLogString(new Object(){}.getClass().getEnclosingMethod()));
+        Log.i(TAG, Utils.methodLogString(Objects.requireNonNull(new Object() {
+        }.getClass().getEnclosingMethod())));
 
         //where was I going with this?...
 //     getContext();
