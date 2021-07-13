@@ -46,7 +46,7 @@ public class ContentFragment extends Fragment {
 
 	//Purpose: extended WebClient where shouldOverrideUrlLoading = false
 	//What does that mean?
-	private class SwAWebClient extends WebViewClient {
+	private static class SwAWebClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {

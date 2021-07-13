@@ -13,8 +13,8 @@ import com.dstrube.weblistintent.R;
 import com.dstrube.weblistintent.model.LinkData;
 
 public class LinkAdapter extends ArrayAdapter<LinkData> {
-	private Context ctx;
-	private List<LinkData> linkDataList;
+	private final Context ctx;
+	private final List<LinkData> linkDataList;
 
 	public LinkAdapter(List<LinkData> linkDataList, Context ctx) {
 		super(ctx, R.layout.row_layout, linkDataList);

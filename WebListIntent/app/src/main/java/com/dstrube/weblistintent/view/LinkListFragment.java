@@ -46,8 +46,8 @@ public class LinkListFragment extends Fragment {
 		final Context ctx = getView().getContext();
 		final Resources res = ctx.getResources();
 		final String[] domains = res.getStringArray(R.array.domains);
-		for (int i = 0; i < domains.length; i++) {
-			linkDataList.add(new LinkData(domains[i], "http://www."+domains[i]+".com"));
+		for (String domain : domains) {
+			linkDataList.add(new LinkData(domain, "http://www." + domain + ".com"));
 		}
 	}
 
