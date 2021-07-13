@@ -7,7 +7,6 @@ import android.widget.RemoteViews;
 
 public class MyWidgetIntentReceiver extends BroadcastReceiver {
 	public static int clickCount = 0;
-	private String msg[] = null;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -34,7 +33,7 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
 
 	private String getDesc(Context context) {
 		// some static jokes from xml
-		msg = context.getResources().getStringArray(R.array.news_headlines);
+		String[] msg = context.getResources().getStringArray(R.array.news_headlines);
 		if (clickCount >= msg.length) {
 			clickCount = 0;
 		}
