@@ -23,26 +23,18 @@ public class MySAXParser {
 
 	private static XMLReader reader = null;
 	private static MenuItemXMLHandler handler = null;
-	private static SAXParserFactory factory = null;
-	private static SAXParser parser = null;
-	private static ArrayList<MenuItem> list = null;
 	private static Context context = null;
 
 	private static void preParse(Context ctx) {
 
 		try {
 			context = ctx;
-			factory = SAXParserFactory.newInstance();
-			parser = factory.newSAXParser();
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser parser = factory.newSAXParser();
 			reader = parser.getXMLReader();
 			handler = new MenuItemXMLHandler();
 			reader.setContentHandler(handler);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-			Toast.makeText(
-					context, e.toString(),
-					Toast.LENGTH_LONG).show();
-		} catch (SAXException e) {
+		} catch (ParserConfigurationException | SAXException e) {
 			e.printStackTrace();
 			Toast.makeText(
 					context, e.toString(),
@@ -51,7 +43,7 @@ public class MySAXParser {
 	}
 
 	private static ArrayList<MenuItem> postParse() {
-		list = handler.getList();
+		ArrayList<MenuItem> list = handler.getList();
 
 		for (int i = 0; i < list.size(); i++) {
 			com.dstrube.xmlparsingtest.model.MenuItem item = list.get(i);
@@ -76,12 +68,7 @@ public class MySAXParser {
 
 			// } catch (ParserConfigurationException e) {
 			// e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-			Toast.makeText(
-					context, e.toString(),
-					Toast.LENGTH_LONG).show();
-		} catch (IOException e) {
+		} catch (SAXException | IOException e) {
 			e.printStackTrace();
 			Toast.makeText(
 					context, e.toString(),
@@ -102,12 +89,7 @@ public class MySAXParser {
 			// e.printStackTrace();
 			// Toast.makeText(getApplicationContext(), e.toString(),
 			// Toast.LENGTH_LONG).show();
-		} catch (SAXException e) {
-			e.printStackTrace();
-			Toast.makeText(
-					context, e.toString(),
-					Toast.LENGTH_LONG).show();
-		} catch (IOException e) {
+		} catch (SAXException | IOException e) {
 			e.printStackTrace();
 			Toast.makeText(
 					context, e.toString(),

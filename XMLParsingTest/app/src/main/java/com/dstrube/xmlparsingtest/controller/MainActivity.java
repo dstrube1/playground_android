@@ -51,13 +51,6 @@ import android.widget.Toast;
 //http://www.mysamplecode.com/2011/11/android-parse-xml-file-example-using.html
 public class MainActivity extends ListActivity {
 
-	private final String url = "http://api.androidhive.info/pizza/?format=xml";
-	// private final String KEY_ITEM = "item"; // parent node
-	private final String KEY_ID = "id";
-	private final String KEY_NAME = "name";
-	private final String KEY_COST = "cost";
-	private final String KEY_DESC = "description";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -92,10 +85,15 @@ public class MainActivity extends ListActivity {
 		// listView.setAdapter(adapter);
 
 		ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
+		String KEY_NAME = "name";
+		String KEY_COST = "cost";
+		String KEY_DESC = "description";
 		for (int i = 0; i < list.size(); i++) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			// Element e = (Element) list.get(i);
 			// adding each child node to HashMap key => value
+			// private final String KEY_ITEM = "item"; // parent node
+			String KEY_ID = "id";
 			map.put(KEY_ID, list.get(i).getId());
 			map.put(KEY_NAME, list.get(i).getName());
 			map.put(KEY_COST, list.get(i).getCost());
@@ -107,7 +105,7 @@ public class MainActivity extends ListActivity {
 		// Adding menuItems to ListView
 		ListAdapter adapter = new SimpleAdapter(this, menuItems,
 				R.layout.list_item,
-				new String[] { KEY_NAME, KEY_DESC, KEY_COST }, new int[] {
+				new String[] {KEY_NAME, KEY_DESC, KEY_COST}, new int[] {
 						R.id.name, R.id.desciption, R.id.cost });
 
 		setListAdapter(adapter);
@@ -128,10 +126,6 @@ public class MainActivity extends ListActivity {
 			HttpEntity httpEntity = httpResponse.getEntity();
 			xml = EntityUtils.toString(httpEntity);
 
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -149,14 +143,13 @@ public class MainActivity extends ListActivity {
 			try {
 				InputStream input = getAssets().open("test0.xml");
 				list = MySAXParser.parseFile(input, MainActivity.this);
-			} catch (IOException e) {
-				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			if (list == null || list.size() == 0) {
 				try {
+					String url = "http://api.androidhive.info/pizza/?format=xml";
 					String xml = getXmlFromUrl(url);
 
 					list = MySAXParser.parseString(xml, MainActivity.this);
@@ -207,9 +200,8 @@ public class MainActivity extends ListActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			return inflater.inflate(R.layout.fragment_main, container,
 					false);
-			return rootView;
 		}
 	}
 
