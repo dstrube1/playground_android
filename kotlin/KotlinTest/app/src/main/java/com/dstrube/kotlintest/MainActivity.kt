@@ -21,9 +21,9 @@ sealed /*as opposed to `open`, ie, inheritable / extendable */class MainActivity
 
         tv?.text = "x"
 
-        var myText: String? = null
+        val myText: String? = null
 
-        val t: DataClassTest = DataClassTest(1, "x")
+        //val t: DataClassTest = DataClassTest(1, "x")
 /*
 Cool old stuff:
         myText = "t = ${t.param1} + ${t.param2} \n"
@@ -102,10 +102,10 @@ Cool old stuff:
     fun sum(x: Int, y: Int) = x + y
 
     fun caseEx0(x: Int): String {
-        when (x) {
-            1 -> return "1\n"
-            in 1..4 -> return "in 1..4: $x\n"
-            !in 1..4 -> return "!in 1..4: $x\n"
+        return when (x) {
+            1 -> "1\n"
+            in 1..4 -> "in 1..4: $x\n"
+            !in 1..4 -> "!in 1..4: $x\n"
             else -> throw IllegalArgumentException("Impossible: $x")
         }
     }
@@ -140,7 +140,7 @@ Cool old stuff:
         TODO("Later")
     }
     fun lowerOrderFunction(param:String):Boolean{
-        if (param.length > 0) return true
+        if (param.isNotEmpty()) return true
         return false
     }
 }
