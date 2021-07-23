@@ -6,8 +6,6 @@ import android.widget.ListView
 import android.widget.ArrayAdapter
 import java.util.*
 
-
-
 class MainActivity : Activity() {
 
     private var mainListView: ListView? = null
@@ -18,7 +16,6 @@ class MainActivity : Activity() {
     }
 
     override fun onResume() {
-        // TODO Auto-generated method stub
         super.onResume()
         mainListView = findViewById(R.id.mainListView)
 
@@ -40,6 +37,5 @@ class MainActivity : Activity() {
         listAdapter.add("Kling")
         listAdapter.add("Kobold")
         listAdapter.notifyDataSetChanged()
-
     }
 }
