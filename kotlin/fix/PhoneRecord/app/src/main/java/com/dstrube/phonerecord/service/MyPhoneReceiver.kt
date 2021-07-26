@@ -42,7 +42,7 @@ class MyPhoneReceiver : BroadcastReceiver() {
                 val rand = Random()
 
                 datum[columns[0]] = (rand.nextInt().toString())
-                datum[columns[1]] = phoneNumber
+                //datum[columns[1]] = phoneNumber //TODO fix
                 datum[columns[2]] = callerName
                 datum[columns[3]] = dateTime
                 datum[columns[4]] = latitude
