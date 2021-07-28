@@ -36,7 +36,7 @@ class MainActivity : Activity() {
         //image button source:
         //http://www.clker.com/cliparts/5/9/c/2/1194984395619889880earth_globe_dan_gerhrads_01.svg.med.png
         val selected = radioGroup?.checkedRadioButtonId ?: return
-        radioButton = findViewById<RadioButton?>(selected)
+        radioButton = findViewById(selected)
         Toast.makeText(applicationContext, radioButton?.text, Toast.LENGTH_LONG).show()
     }
 
