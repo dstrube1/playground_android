@@ -21,12 +21,23 @@ class EditAnimal : Activity() {
         val objIntent = intent
         val animalId = objIntent.getStringExtra("animalId")
         Log.d("Reading: ", "Reading animals...")
-        val animalList = controller.getAnimalInfo(animalId)
-        Log.d("animalName", animalList.get("animalName"))
-        Log.d("animalTallness", animalList.get("animalTallness"))
-        if (animalList.size !== 0) {
-            animalName?.setText(animalList.get("animalName"))
-            animalTallness?.setText(animalList.get("animalTallness"))
+        val animalList = animalId?.let { controller.getAnimalInfo(it) }
+        if (animalList != null) {
+            animalList["animalName"]?.let { Log.d("animalName", it) }
+        }
+        if (animalList != null) {
+            animalList["animalTallness"]?.let { Log.d("animalTallness", it) }
+        }
+
+        if (animalList != null) {
+            if (animalList.size > 0) {
+                if (animalList != null) {
+                    animalName?.setText(animalList["animalName"])
+                }
+                if (animalList != null) {
+                    animalTallness?.setText(animalList["animalTallness"])
+                }
+            }
         }
     }
 
@@ -37,7 +48,9 @@ class EditAnimal : Activity() {
 
         val objIntent = intent
         val animalId = objIntent.getStringExtra("animalId")
-        queryValues["animalId"] = animalId
+        if(animalId != null) {
+            queryValues["animalId"] = animalId
+        }
         queryValues["animalName"] = animalName?.text.toString()
         queryValues["animalTallness"] = animalTallness?.text.toString()
 
@@ -49,7 +62,9 @@ class EditAnimal : Activity() {
     fun removeAnimal(view: View) {
         val objIntent = intent
         val animalId = objIntent.getStringExtra("animalId")
-        controller.deleteAnimal(animalId)
+        if (animalId != null) {
+            controller.deleteAnimal(animalId)
+        }
         this.callHomeActivity(view)
 
     }

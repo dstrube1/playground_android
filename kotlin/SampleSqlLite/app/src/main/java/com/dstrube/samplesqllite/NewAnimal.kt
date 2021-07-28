@@ -8,10 +8,10 @@ import android.view.View
 
 
 class NewAnimal : Activity() {
-    internal var animalName: EditText? = null
-    internal var animalTallness: EditText? = null
+    private var animalName: EditText? = null
+    private var animalTallness: EditText? = null
 
-    internal var controller = DBController(this)
+    private var controller = DBController(this)
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class NewAnimal : Activity() {
         this.callHomeActivity(view)
     }
 
-    fun callHomeActivity(view: View) {
+    private fun callHomeActivity(view: View) {
         val objIntent = Intent(applicationContext, MainActivity::class.java)
         startActivity(objIntent)
     }

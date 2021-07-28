@@ -1,6 +1,5 @@
 package com.dstrube.samplesqllite
 
-import android.app.Activity
 import android.app.ListActivity
 import android.os.Bundle
 import android.widget.SimpleAdapter
@@ -9,8 +8,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
-
-
 
 class MainActivity : ListActivity() {
 
