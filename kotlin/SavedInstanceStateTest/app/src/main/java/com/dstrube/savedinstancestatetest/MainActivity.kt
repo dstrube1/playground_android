@@ -6,11 +6,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.dstrube.savedinstancestatetest.R.id.roleText
-
-
-
-
 
 class MainActivity : Activity() {
 
@@ -21,14 +16,14 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        roleText = findViewById(R.id.roleText);
-        editText = findViewById(R.id.editText1);
+        roleText = findViewById(R.id.roleText)
+        editText = findViewById(R.id.editText1)
     }
 
     fun Click(v: View) {
-        val text = editText?.getText().toString()
+        val text = editText?.text.toString()
         val role = "Role: $text"
-        roleText?.setText(role)
+        roleText?.text = role
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -40,7 +35,7 @@ class MainActivity : Activity() {
         super.onRestoreInstanceState(savedInstanceState)
         val role = savedInstanceState.getString("role")
         //Comment out this line and the magic breaks:
-        roleText?.setText(role)
+        roleText?.text = role
         Toast.makeText(applicationContext, "Role restored", Toast.LENGTH_SHORT).show()
 
     }
