@@ -43,7 +43,7 @@ class LocalWordService : Service() {
         if (list.size >= 20) {
             list.removeAt(0)
         }
-        return Service.START_NOT_STICKY
+        return START_NOT_STICKY
     }
 
     override fun onBind(arg0: Intent): IBinder {

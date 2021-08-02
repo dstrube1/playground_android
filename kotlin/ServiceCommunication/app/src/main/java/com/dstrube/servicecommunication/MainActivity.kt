@@ -25,7 +25,8 @@ class MainActivity : ListActivity() {
         wordList = ArrayList()
         adapter = ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1,
-                wordList)
+            wordList!!
+        )
         listAdapter = adapter
     }
 
@@ -35,6 +36,7 @@ class MainActivity : ListActivity() {
         bindService(i, mConnection, Context.BIND_AUTO_CREATE)
 
         startService(i)
+        super.onResume()
     }
 
     override fun onPause() {
