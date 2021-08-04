@@ -1,6 +1,6 @@
 package com.dstrube.sharedpreftest
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.SharedPreferences
 import android.widget.EditText
@@ -10,8 +10,8 @@ import android.view.View
 
 class MainActivity : AppCompatActivity() {
 
-    var et: EditText? = null
-    var prefs: SharedPreferences? = null
+    private var et: EditText? = null
+    private var prefs: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,19 +37,19 @@ class MainActivity : AppCompatActivity() {
     fun Clear(v: View) {
         val editor = prefs?.edit()
         editor?.putString("myPref", "")
-        editor?.commit()
+        editor?.apply()
         et?.setText("")
 
     }
 
     fun Save(v: View) {
-        val text = et?.getText().toString()
+        val text = et?.text.toString()
         if (text == "") {
             return
         }
         val editor = prefs?.edit()
         editor?.putString("myPref", text)
-        editor?.commit()
+        editor?.apply()
 
     }
 
