@@ -6,26 +6,22 @@ import android.graphics.Bitmap
 import android.view.View
 import android.widget.*
 import android.widget.ArrayAdapter
-import android.R.attr.bitmap
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
+//import android.R.attr.bitmap
+//import android.opengl.ETC1.getHeight
+//import android.opengl.ETC1.getWidth
 import android.graphics.BitmapFactory
 import android.os.Environment
-import android.os.Environment.DIRECTORY_DCIM
-import android.os.Environment.getRootDirectory
+//import android.os.Environment.DIRECTORY_DCIM
+//import android.os.Environment.getRootDirectory
 import android.util.Log
-import android.R.attr.bitmap
+//import android.R.attr.bitmap
 import android.graphics.Matrix
 //import com.sun.tools.corba.se.idl.Util.getAbsolutePath
 import java.io.File
 import android.widget.SeekBar
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-
-
-
-
-
+import java.util.*
 
 class MainActivity : Activity() {
 
@@ -82,7 +78,7 @@ class MainActivity : Activity() {
                 //                Environment.getExternalStorageDirectory().getPath(),              // /storage/emulated/0
                 //                Environment.getDataDirectory().getPath(),                         // /data
                 //                Environment.getDownloadCacheDirectory().getPath(),                // /cache
-                Environment.getRootDirectory().getPath(), // /system
+                Environment.getRootDirectory().path, // /system
                 //                getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath(),    // /storage/emulated/0/Android/data/com.dstrube.skewedbitmap/files/Pictures
                 getExternalFilesDir(Environment.DIRECTORY_DCIM)!!.path)// /storage/emulated/0/Android/data/com.dstrube.skewedbitmap/files/DCIM
         //                getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getPath(),   // /storage/emulated/0/Android/data/com.dstrube.skewedbitmap/files/Download
@@ -132,13 +128,14 @@ class MainActivity : Activity() {
             Log.e(TAG, "no files found in $path")
             return null
         }
-        for (f in files!!) {
+        for (f in files) {
             if (f.isDirectory) {
                 val temp = getImage(f.absolutePath)
                 return temp ?: continue
             }
             Log.i(TAG, "file: " + f.name)
-            if (f.name.toLowerCase().endsWith(".jpg") || f.name.toLowerCase().endsWith(".png")) {
+            if (f.name.lowercase(Locale.getDefault()).endsWith(".jpg") || f.name.lowercase(Locale.getDefault())
+                    .endsWith(".png")) {
                 return f.absolutePath
             }
         }
@@ -154,7 +151,8 @@ class MainActivity : Activity() {
 
         // Recreate bitmap image according to matrix values
 
-        val resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bmpWidth!!, bmpHeight!!, matrix, true)
+        val resizedBitmap =
+            bitmap?.let { Bitmap.createBitmap(it, 0, 0, bmpWidth!!, bmpHeight!!, matrix, true) }
         myImageView?.setImageBitmap(resizedBitmap)
 
     }
@@ -217,7 +215,7 @@ class MainActivity : Activity() {
     }
 
 
-    private val spinnerScaleOnItemSelectedListener = object : AdapterView.OnItemSelectedListener { //was Spinner.OnItemSelectedListener
+    private val spinnerScaleOnItemSelectedListener = object : OnItemSelectedListener { //was Spinner.OnItemSelectedListener
 
         override fun onItemSelected(arg0: AdapterView<*>, arg1: View,
                            arg2: Int, arg3: Long) {
