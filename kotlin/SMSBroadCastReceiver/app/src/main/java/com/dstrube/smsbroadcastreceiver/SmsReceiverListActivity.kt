@@ -9,11 +9,6 @@ import java.util.*
 import android.content.Intent
 import android.content.IntentFilter
 
-
-
-
-
-
 class SmsReceiverListActivity : ListActivity() {
 
     private var mIntentReceiver: BroadcastReceiver? = null
@@ -36,8 +31,8 @@ class SmsReceiverListActivity : ListActivity() {
         //TODO Find Kotlin equivalent of this (and not just the following workaround):
 //        var planetsAsList = Arrays.asList(planets)
 //        planetList.addAll(planetsAsList)
-        for (i in 0 until planets.size) {
-            planetList.add(planets[i])
+        for (element in planets) {
+            planetList.add(element)
         }
 
         // Create ArrayAdapter using the planet list.
@@ -63,18 +58,20 @@ class SmsReceiverListActivity : ListActivity() {
                 var msg = intent.getStringExtra("get_msg")
 
                 // Process the sms format and extract body &amp; phoneNumber
-                msg = msg.replace("\n", "")
-                val body = msg.substring(msg.lastIndexOf(":") + 1,
-                        msg.length)
-                val pNumber = msg.substring(0, msg.lastIndexOf(":"))
-                //listAdapter.clear();
-                //listAdapter.add(body);
+                if (msg != null) {
+                    msg = msg.replace("\n", "")
+                    val body = msg.substring(msg.lastIndexOf(":") + 1,
+                            msg.length)
+                    val pNumber = msg.substring(0, msg.lastIndexOf(":"))
+                    //listAdapter.clear();
+                    //listAdapter.add(body);
 
-                // Add it to the list or do whatever you wish to
-                val hm = HashMap<String, String>()
-                hm["number"] = pNumber
-                hm["msg"] = body
-                list.add(hm)
+                    // Add it to the list or do whatever you wish to
+                    val hm = HashMap<String, String>()
+                    hm["number"] = pNumber
+                    hm["msg"] = body
+                    list.add(hm)
+                }
 
                 listAdapter?.notifyDataSetChanged()
                 println("RECEIVED ::: $msg")
