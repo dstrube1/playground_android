@@ -1,15 +1,13 @@
 package com.dstrube.helloaumazondible;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.widget.GridView;
 
 public class MainActivity extends Activity {
-
-    private MyAdapter adapter;
-    private MyDataSource dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +16,12 @@ public class MainActivity extends Activity {
 
         //singleton initialization of my data source
         //we don't want more than one of these running around
-        dataSource = MyDataSource.getInstance();
+        MyDataSource dataSource = MyDataSource.getInstance();
         //get the data
         dataSource.getMoreData();
 
         //the adapter used for the gridview
-        adapter = new MyAdapter(this, dataSource, getWindowXSize());
+        MyAdapter adapter = new MyAdapter(this, dataSource, getWindowXSize());
         //the gridview
         GridView gridView = findViewById(R.id.gridView);
         gridView.setOnScrollListener(adapter);
@@ -35,9 +33,16 @@ public class MainActivity extends Activity {
      * @return x size of the window
      */
     public int getWindowXSize(){
-        Display display = getWindowManager().getDefaultDisplay();
+//        Display display = getWindowManager().getDefaultDisplay();
+        //^Deprecated; alert says to use this:
+        //Context.getDisplay();
+        // but it's not that easy
+        Context context = getApplicationContext();
+        Display display = context.getDisplay();
         Point size = new Point();
-        display.getSize(size);
+//        display.getSize(size);
+        //^Deprecated
+        display.getRealSize(size);
         return size.x;
     }
 }

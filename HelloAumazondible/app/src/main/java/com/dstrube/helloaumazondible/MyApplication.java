@@ -12,7 +12,6 @@ public class MyApplication  extends Application {
 
     private static RequestQueue requestQueue;
     private static ImageLoader imageLoader;
-    private static ImageLoader.ImageCache imageCache;
 
     private static MyApplication instance;
     @Override
@@ -27,7 +26,7 @@ public class MyApplication  extends Application {
     //
     public static ImageLoader getImageLoader() {
         if (imageLoader == null){
-            imageCache = new BitmapLruCache();
+            ImageLoader.ImageCache imageCache = new BitmapLruCache();
             imageLoader = new ImageLoader(getRequestQueue(), imageCache);
         }
         return imageLoader;
@@ -69,9 +68,8 @@ public class MyApplication  extends Application {
         public static int getDefaultLruCacheSize() {
             final int maxMemory =
                     (int) (Runtime.getRuntime().maxMemory() / 1024);
-            final int cacheSize = maxMemory / 8;
 
-            return cacheSize;
+            return maxMemory / 8;
         }
     }
 

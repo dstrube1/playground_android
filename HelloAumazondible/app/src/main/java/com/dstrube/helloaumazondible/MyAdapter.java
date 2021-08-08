@@ -13,10 +13,10 @@ import java.util.ArrayList;
 public class MyAdapter extends BaseAdapter implements MyDataSource.OnDataChangedListener,
         AbsListView.OnScrollListener {
 
-    private ArrayList<String> imagesUrls;
-    private int screenSize;
-    private Context context;
-    private MyDataSource dataSource;
+    private final ArrayList<String> imagesUrls;
+    private final int screenSize;
+    private final Context context;
+    private final MyDataSource dataSource;
 
     public MyAdapter(Context context, MyDataSource dataSource, int screenSize) {
         super();
@@ -39,9 +39,7 @@ public class MyAdapter extends BaseAdapter implements MyDataSource.OnDataChanged
     }
 
     public boolean imageIsSmall(int pos) {
-        if (pos % 3 == 0)
-            return false;
-        return true;
+        return pos % 3 != 0;
     }
 
     //
@@ -96,9 +94,7 @@ public class MyAdapter extends BaseAdapter implements MyDataSource.OnDataChanged
     public void onScroll(AbsListView view, int firstVisibleItem,
                          int visibleItemCount, int totalItemCount) {
         int count = getCount();
-        if (count == 0) {
-            return;
-        } else if (firstVisibleItem > count - 10 && !dataSource.isLoading()) {
+        if (count != 0 && firstVisibleItem > count - 10 && !dataSource.isLoading()) {
             dataSource.getMoreData();
         }
     }

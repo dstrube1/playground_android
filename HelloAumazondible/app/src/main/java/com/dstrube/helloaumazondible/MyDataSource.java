@@ -1,6 +1,6 @@
 package com.dstrube.helloaumazondible;
 
-import android.content.Context;
+//import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -16,15 +16,13 @@ import java.util.ArrayList;
 
 public class MyDataSource implements Response.ErrorListener,
         Response.Listener<JSONObject> {
-    private RequestQueue requestQueue;
-    private ArrayList<String> imagesUrls;
+    private final RequestQueue requestQueue;
+    private final ArrayList<String> imagesUrls;
     private int retries;
     private String url;
     private boolean loading;
     private OnDataChangedListener onDataChangedListener;
     private static MyDataSource singleton;
-    private final String CLIENT_ID = "e7ce3f1a709543c7a03313e7f2e02bb4";
-    private final String TAG = "selfie";
 
 
     //TODO: perhaps use of volatile here for threading concerns?
@@ -44,12 +42,14 @@ public class MyDataSource implements Response.ErrorListener,
     }
 
     public interface OnDataChangedListener {
-        public void onDataChanged();
+        void onDataChanged();
     }
 
     private void prepareUrlString() {
         url = "https://api.instagram.com/v1/tags/{tag}/media/recent/?client_id={client_id}";
+        String TAG = "selfie";
         url = url.replace("{tag}", TAG);
+        String CLIENT_ID = "e7ce3f1a709543c7a03313e7f2e02bb4";
         url = url.replace("{client_id}", CLIENT_ID);
     }
 
