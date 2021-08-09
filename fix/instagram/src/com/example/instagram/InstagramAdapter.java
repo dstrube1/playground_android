@@ -14,8 +14,8 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.example.instagram.InstagramDataSource.OnDataChangedListener;
 
 public class InstagramAdapter extends BaseAdapter implements OnDataChangedListener, OnScrollListener{
-	private ArrayList<String> imagesUrls;
-	private int screenSize;
+	private final ArrayList<String> imagesUrls;
+	private final int screenSize;
 	Context context;
 	InstagramDataSource instagramDataSource;
 	
@@ -72,8 +72,7 @@ public class InstagramAdapter extends BaseAdapter implements OnDataChangedListen
 		image.setMinimumHeight(size);
 	}
 	public boolean imageIsSmall(int position){
-		if(position % 3 == 0)return false;
-		return true;
+		return position % 3 != 0;
 	}
 	
 	

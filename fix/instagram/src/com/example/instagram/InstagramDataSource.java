@@ -16,8 +16,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 //Singleton class to handle all server calls
 //
 public class InstagramDataSource implements Response.ErrorListener, Response.Listener<JSONObject>{
-	private RequestQueue requestQueue;
-	private ArrayList<String> imagesUrls;
+	private final RequestQueue requestQueue;
+	private final ArrayList<String> imagesUrls;
 	private int retries;
 	private String urlString;
 	private boolean loading;
@@ -68,7 +68,7 @@ public class InstagramDataSource implements Response.ErrorListener, Response.Lis
 	//Methods & Interfaces by listeners
 	//
 	public interface OnDataChangedListener{
-		public void onDataChanged();
+		void onDataChanged();
 	}
 	public ArrayList<String> getImagesUrls(){
 		return imagesUrls;

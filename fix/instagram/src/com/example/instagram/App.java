@@ -13,8 +13,7 @@ import com.android.volley.toolbox.Volley;
 public class App extends Application {
 	private static RequestQueue requestQueue;
 	private static ImageLoader imageLoader;
-	private static ImageLoader.ImageCache imageCache;
-	
+
 	private static App instance;
 	@Override
 	public void onCreate() {
@@ -27,7 +26,7 @@ public class App extends Application {
 	//
 	public static ImageLoader getImageLoader() {
 		if (imageLoader == null){
-			imageCache = new BitmapLruCache();
+			ImageLoader.ImageCache imageCache = new BitmapLruCache();
 			imageLoader = new ImageLoader(getRequestQueue(), imageCache);
 		}
 		return imageLoader;
@@ -64,9 +63,8 @@ public class App extends Application {
 	    public static int getDefaultLruCacheSize() {
 	        final int maxMemory =
 	                (int) (Runtime.getRuntime().maxMemory() / 1024);
-	        final int cacheSize = maxMemory / 8;
 
-	        return cacheSize;
+			return maxMemory / 8;
 	    }
 	}
 }
