@@ -3,7 +3,9 @@ package com.dstrube.instagramtest;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
+
+import androidx.annotation.NonNull;
+import androidx.collection.LruCache;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -16,7 +18,6 @@ import com.android.volley.toolbox.Volley;
 public class App  extends Application {
     private static RequestQueue requestQueue;
     private static ImageLoader imageLoader;
-    private static ImageLoader.ImageCache imageCache;
 
     private static App instance;
     @Override
@@ -30,7 +31,7 @@ public class App  extends Application {
     //
     public static ImageLoader getImageLoader() {
         if (imageLoader == null){
-            imageCache = new BitmapLruCache();
+            ImageLoader.ImageCache imageCache = new BitmapLruCache();
             imageLoader = new ImageLoader(getRequestQueue(), imageCache);
         }
         return imageLoader;
@@ -56,7 +57,7 @@ public class App  extends Application {
         }
 
         @Override
-        protected int sizeOf(String key, Bitmap value) {
+        protected int sizeOf(@NonNull String key, Bitmap value) {
             return value.getRowBytes() * value.getHeight() / 1024;
         }
 
@@ -73,9 +74,8 @@ public class App  extends Application {
         public static int getDefaultLruCacheSize() {
             final int maxMemory =
                     (int) (Runtime.getRuntime().maxMemory() / 1024);
-            final int cacheSize = maxMemory / 8;
 
-            return cacheSize;
+            return maxMemory / 8;
         }
     }
 

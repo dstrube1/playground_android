@@ -2,7 +2,7 @@ package com.dstrube.instagramtest;
 
 import android.util.Log;
 
-import com.android.volley.Request;
+//import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class InstagramDataSource implements Response.ErrorListener, Response.Listener<JSONObject> {
     private static final String TAG = InstagramDataSource.class.getName();
-    private RequestQueue requestQueue;
-    private ArrayList<String> imagesUrls;
+    private final RequestQueue requestQueue;
+    private final ArrayList<String> imagesUrls;
     private int retries;
     private String urlString;
     private boolean loading;
@@ -73,7 +73,7 @@ public class InstagramDataSource implements Response.ErrorListener, Response.Lis
     //Methods & Interfaces by listeners
     //
     public interface OnDataChangedListener {
-        public void onDataChanged();
+        void onDataChanged();
     }
 
     public ArrayList<String> getImagesUrls() {

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class InstagramAdapter extends BaseAdapter
         implements InstagramDataSource.OnDataChangedListener, AbsListView.OnScrollListener {
 
-    private ArrayList<String> imagesUrls;
-    private int screenSize;
+    private final ArrayList<String> imagesUrls;
+    private final int screenSize;
     Context context;
     InstagramDataSource instagramDataSource;
 
@@ -72,8 +72,7 @@ public class InstagramAdapter extends BaseAdapter
     }
 
     public boolean imageIsSmall(int position){
-        if(position % 3 == 0)return false;
-        return true;
+        return position % 3 != 0;
     }
 
     //

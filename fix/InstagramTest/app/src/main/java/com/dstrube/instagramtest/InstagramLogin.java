@@ -15,11 +15,8 @@ import com.android.volley.toolbox.StringRequest;
 public class InstagramLogin implements Response.ErrorListener, Response.Listener<String>{
 
     private static final String TAG = InstagramDataSource.class.getName();
-    private RequestQueue requestQueue;
-    private int retries;
-    private String urlString;
-    private boolean loading;
-//    private OnDataChangedListener onDataChangedListener;
+    private final RequestQueue requestQueue;
+    //    private OnDataChangedListener onDataChangedListener;
     private static InstagramLogin singleton;
 
     //
@@ -33,8 +30,8 @@ public class InstagramLogin implements Response.ErrorListener, Response.Listener
     }
 
     private InstagramLogin(final String redirect_uri, final WebView myWebView) {//finalString tag){
-        loading = true;
-        retries = 0;
+        boolean loading = true;
+        int retries = 0;
         requestQueue = App.getRequestQueue();
         login(redirect_uri, myWebView);
     }
@@ -42,30 +39,24 @@ public class InstagramLogin implements Response.ErrorListener, Response.Listener
     private void login(final String redirect_uri, final WebView myWebView) {
         final String client_id = "e7ce3f1a709543c7a03313e7f2e02bb4";
 
-        urlString = "https://api.instagram.com/oauth/authorize/?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code";
+        String urlString = "https://api.instagram.com/oauth/authorize/?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code";
         urlString = urlString.replace("{redirect_uri}", redirect_uri);
         urlString = urlString.replace("{client_id}", client_id);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlString,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 50 characters of the response string.
-                        Log.i(TAG, "Got response : " + response.substring(0, 50));
-                        Toast.makeText(App.getContext(), "Got response from login request", Toast.LENGTH_SHORT).show();
-                        String encodedHtml = Base64.encodeToString(response.getBytes(),
-                                Base64.NO_PADDING);
-                        myWebView.loadData(encodedHtml, "text/html", "base64");
+                response -> {
+                    // Display the first 50 characters of the response string.
+                    Log.i(TAG, "Got response : " + response.substring(0, 50));
+                    Toast.makeText(App.getContext(), "Got response from login request", Toast.LENGTH_SHORT).show();
+                    String encodedHtml = Base64.encodeToString(response.getBytes(),
+                            Base64.NO_PADDING);
+                    myWebView.loadData(encodedHtml, "text/html", "base64");
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login request error: " + error.getMessage());
-                Toast.makeText(App.getContext(), "Error received during login request", Toast.LENGTH_SHORT).show();
-            }
-        });
+                }, error -> {
+                    Log.e(TAG, "Login request error: " + error.getMessage());
+                    Toast.makeText(App.getContext(), "Error received during login request", Toast.LENGTH_SHORT).show();
+                });
 
         requestQueue.add(stringRequest);
     }
