@@ -2,19 +2,12 @@ package com.example.xmlparsing;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-//TODO: https://stackoverflow.com/questions/32340629/cant-import-org-apache-http-httpresponse-in-android-studio
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,6 +16,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.util.Log;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class DOMXMLParser {
 
@@ -37,30 +34,26 @@ public class DOMXMLParser {
 	 * */
 	public String getXmlFromUrl(String url) {
 		String xml = null;
+		OkHttpClient client = new OkHttpClient();
+		Request request = new Request.Builder()
+				.url(url)
+				.build();
 
-		try {
-			// defaultHttpClient
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpPost httpPost = new HttpPost(url);
-
-			HttpResponse httpResponse = httpClient.execute(httpPost);
-			HttpEntity httpEntity = httpResponse.getEntity();
-			xml = EntityUtils.toString(httpEntity);
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		try (Response response = client.newCall(request).execute()) {
+			xml = Objects.requireNonNull(response.body()).string();
+		}catch (IOException exception){
+			//
+		}catch (NullPointerException npe){
+			//
 		}
+
 		// return XML
 		return xml;
 	}
 	
 	/**
 	 * Getting XML DOM element
-	 * @param XML string
+	 * @param xml string
 	 * */
 	public Document getDomElement(String xml){
 		Document doc = null;
@@ -106,8 +99,8 @@ public class DOMXMLParser {
 	 
 	 /**
 	  * Getting node value
-	  * @param Element node
-	  * @param key string
+	  * @param item node
+	  * @param str string
 	  * */
 	 public String getValue(Element item, String str) {		
 			NodeList n = item.getElementsByTagName(str);		

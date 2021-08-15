@@ -102,7 +102,6 @@ public class MainActivity extends ListActivity {
 		
 	}
 
-	
 	private class NetworkXMLCall extends AsyncTask<Void, Void, Void>{
 
 		@Override
