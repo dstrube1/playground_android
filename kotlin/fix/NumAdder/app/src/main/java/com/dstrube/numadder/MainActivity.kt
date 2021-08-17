@@ -31,27 +31,25 @@ class MainActivity : Activity() {
     }
 
     private fun addListenerOnButton() {
-        edText1 = findViewById(R.id.editText1) as EditText
-        edText2 = findViewById(R.id.editText2) as EditText
-        edText3 = findViewById(R.id.editText3) as EditText
+        edText1 = findViewById(R.id.editText1)
+        edText2 = findViewById(R.id.editText2)
+        edText3 = findViewById(R.id.editText3)
 
-        btnSum = findViewById(R.id.button1) as Button
-        btnSum?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View) {
-                try {
-                    val t1 = edText1?.text.toString()
-                    val t2 = edText2?.text.toString()
+        btnSum = findViewById(R.id.button1)
+        btnSum?.setOnClickListener {
+            try {
+                val t1 = edText1?.text.toString()
+                val t2 = edText2?.text.toString()
 
-                    val i1 = Integer.parseInt(t1)
-                    val i2 = Integer.parseInt(t2)
+                val i1 = Integer.parseInt(t1)
+                val i2 = Integer.parseInt(t2)
 
-                    val sum = i1 + i2
-                    val t3 = Integer.toString(sum)
-                    edText3?.setText(t3)
-                } catch (e: Exception) {
+                val sum = i1 + i2
+                val t3 = sum.toString()
+                edText3?.setText(t3)
+            } catch (e: Exception) {
 
-                }
             }
-        })
+        }
     }
 }
