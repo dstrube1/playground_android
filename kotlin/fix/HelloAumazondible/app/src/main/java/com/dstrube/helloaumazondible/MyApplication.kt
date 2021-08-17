@@ -2,7 +2,7 @@ package com.dstrube.helloaumazondible
 
 import android.app.Application
 import android.graphics.Bitmap
-import android.support.v4.util.LruCache
+import androidx.collection.LruCache
 import com.android.volley.toolbox.Volley
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.ImageLoader
@@ -21,11 +21,11 @@ class MyApplication : Application() {
             return bitmap.rowBytes * bitmap.height / 1024
         }
 
-        override fun getBitmap(url: String): Bitmap {
+        fun getBitmap(url: String): Bitmap? {
             return get(url)
         }
 
-        override fun putBitmap(url: String, bitmap: Bitmap) {
+        fun putBitmap(url: String, bitmap: Bitmap) {
             put(url, bitmap)
         }
 

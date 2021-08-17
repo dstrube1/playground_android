@@ -21,8 +21,8 @@ class MyAdapter(private val context: Context, private val dataSource: MyDataSour
     fun setImageSize(networkImageView: NetworkImageView, pos: Int) {
         var size = screenSize
         if (imageIsSmall(pos))
-            size = size / 2
-        size = size - (size * .05).toInt()
+            size /= 2
+        size -= (size * .05).toInt()
         networkImageView.setMaxHeight(size)
         networkImageView.setMinimumHeight(size)
         networkImageView.setMinimumWidth(size)
@@ -32,12 +32,7 @@ class MyAdapter(private val context: Context, private val dataSource: MyDataSour
     fun imageIsSmall(pos: Int): Boolean {
         //elegant, but harder to debug:
 //        return if (pos % 3 == 0) false else true
-        if (pos % 3 == 0){
-            return false
-        }
-        else {
-            return true
-        }
+        return pos % 3 != 0
     }
 
     //

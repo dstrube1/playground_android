@@ -13,7 +13,7 @@ import com.android.volley.Response
 class MyDataSource// Singleton pattern requires private constructor
 private constructor() : Response.ErrorListener, Response.Listener<JSONObject> {
     private val requestQueue: RequestQueue?
-    val imagesUrls: ArrayList<String>
+    val imagesUrls: ArrayList<String> = ArrayList()
     private var retries: Int = 0
     private var url: String? = null
     var isLoading: Boolean = false
@@ -23,7 +23,6 @@ private constructor() : Response.ErrorListener, Response.Listener<JSONObject> {
     private val TAG = "selfie"
 
     init {
-        imagesUrls = ArrayList()
         isLoading = true
         retries = 0
         requestQueue = MyApplication.getRequestQueue()
