@@ -8,7 +8,6 @@ import android.widget.SimpleAdapter
 import android.widget.TextView
 import com.dstrube.phonerecord.R
 
-
 class CustomAdapter(private val context: Context, data: List<Map<String, *>>,
                     resource: Int, from: Array<String>, to: IntArray) : SimpleAdapter(context, data, resource, from, to) {
 
@@ -30,13 +29,8 @@ class CustomAdapter(private val context: Context, data: List<Map<String, *>>,
         return data[position]
     }
 
-    // Get item id of item in the list
-    override fun getItemId(position: Int): Long {
-        return super.getItemId(position)
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
-        val view: View? = convertView ?: inflater.inflate(com.dstrube.phonerecord.R.layout.list_item,
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view: View? = convertView ?: inflater.inflate(R.layout.list_item,
                     parent, false)
 
         @Suppress("UNCHECKED_CAST")

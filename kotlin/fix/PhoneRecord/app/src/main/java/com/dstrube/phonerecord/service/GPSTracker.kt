@@ -13,14 +13,13 @@ import android.util.Log
 import java.io.IOException
 import java.util.*
 
-
 //TODO This is all interesting, but what is it doing in this project?
 
 class GPSTracker
 /**
  * Constructor
  *
- * @param context
+ * @param mContext
  */
 (private val mContext: Context) : Service(), LocationListener {
 

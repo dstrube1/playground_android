@@ -6,7 +6,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteOpenHelper
 import com.dstrube.phonerecord.R
 
-
 class DBController
 /**
  * Constructor
