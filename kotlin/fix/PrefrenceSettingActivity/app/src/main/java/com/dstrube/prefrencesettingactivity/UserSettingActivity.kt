@@ -3,9 +3,7 @@ package com.dstrube.prefrencesettingactivity
 import android.os.Bundle
 import android.app.Activity
 
-
 class UserSettingActivity : Activity() {
-
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

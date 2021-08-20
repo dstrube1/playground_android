@@ -10,12 +10,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 
-
 class MainActivity : Activity() {
 
     private val RESULT_SETTINGS = 1
     private val TAG = MainActivity::class.java.name
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
