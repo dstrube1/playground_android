@@ -7,13 +7,14 @@ import android.app.ActionBar
 import android.app.Fragment
 import android.preference.PreferenceManager
 import android.content.res.Configuration
-import android.support.v4.app.ActionBarDrawerToggle
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
+//import androidx.legacy.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AdapterView
 import android.widget.ListView
+import androidx.appcompat.app.ActionBarDrawerToggle
 
 
 /**
@@ -44,7 +45,7 @@ class NavigationDrawerFragment : Fragment() {
     private val isDrawerOpen: Boolean
         get() = mDrawerLayout != null && mDrawerLayout!!.isDrawerOpen(mFragmentContainerView!!)
 
-    private val actionBar: ActionBar
+    private val actionBar: ActionBar?
         get() = activity.actionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,17 +75,16 @@ class NavigationDrawerFragment : Fragment() {
                      savedInstanceState: Bundle): View {
         mDrawerListView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false) as ListView
-        mDrawerListView!!.onItemClickListener = object : AdapterView.OnItemClickListener {
-            override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                selectItem(position)
-            }
-        }
-        mDrawerListView!!.adapter = ArrayAdapter(
-                actionBar.themedContext,
+        mDrawerListView!!.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id -> selectItem(position) }
+        mDrawerListView!!.adapter = actionBar?.let {
+            ArrayAdapter(
+                it.themedContext,
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 arrayOf<String>(getString(R.string.title_section1), getString(R.string.title_section2),
-                        getString(R.string.title_section3))))
+                    getString(R.string.title_section3)))
+        }
         mDrawerListView!!.setItemChecked(mCurrentSelectedPosition, true)
         return mDrawerListView!!
     }
@@ -104,8 +104,10 @@ class NavigationDrawerFragment : Fragment() {
         // set up the drawer's list view with items and click listener
 
         val actionBar = actionBar
-        actionBar.setDisplayHomeAsUpEnabled(true)
-        actionBar.setHomeButtonEnabled(true)
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeButtonEnabled(true)
+        }
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
@@ -224,9 +226,11 @@ class NavigationDrawerFragment : Fragment() {
      */
     private fun showGlobalContextActionBar() {
         val actionBar = actionBar
-        actionBar.setDisplayShowTitleEnabled(true)
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD)
-        actionBar.setTitle(R.string.app_name)
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(true)
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD)
+            actionBar.setTitle(R.string.app_name)
+        }
     }
 
     /**
