@@ -7,6 +7,7 @@ import android.app.ActionBar
 import android.app.Fragment
 import android.preference.PreferenceManager
 import android.content.res.Configuration
+import android.util.Log
 //import androidx.legacy.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,7 +16,6 @@ import android.widget.ArrayAdapter
 import android.widget.AdapterView
 import android.widget.ListView
 import androidx.appcompat.app.ActionBarDrawerToggle
-
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -65,16 +65,18 @@ class NavigationDrawerFragment : Fragment() {
         selectItem(mCurrentSelectedPosition)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup,
-                     savedInstanceState: Bundle): View {
-        mDrawerListView = inflater.inflate(
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+                     savedInstanceState: Bundle?): View {
+        if (inflater != null) {
+            mDrawerListView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false) as ListView
+        }
         mDrawerListView!!.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id -> selectItem(position) }
         mDrawerListView!!.adapter = actionBar?.let {
@@ -114,7 +116,7 @@ class NavigationDrawerFragment : Fragment() {
         mDrawerToggle = object : ActionBarDrawerToggle(
                 activity, /* host Activity */
                 mDrawerLayout, /* DrawerLayout object */
-                R.drawable.ic_drawer, /* nav drawer image to replace 'Up' caret */
+                null, /*R.drawable.ic_drawer,*/ /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open, /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -176,7 +178,8 @@ class NavigationDrawerFragment : Fragment() {
         try {
             mCallbacks = activity as NavigationDrawerCallbacks
         } catch (e: ClassCastException) {
-            throw ClassCastException("Activity must implement NavigationDrawerCallbacks.")
+            //throw ClassCastException("Activity must implement NavigationDrawerCallbacks.")
+            println("Caught exception: $e");
         }
 
     }
