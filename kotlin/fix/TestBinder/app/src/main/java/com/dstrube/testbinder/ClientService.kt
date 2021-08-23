@@ -21,7 +21,7 @@ class ClientService : Service() {
             val data = msg.data
             val title = data.getString("TITLE")
             val pid = Process.myPid()
-            Toast.makeText(applicationContext, title + "\nservice pid: " + pid, Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "$title\nservice pid: $pid", Toast.LENGTH_SHORT).show()
         }
     }
 

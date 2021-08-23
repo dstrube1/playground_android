@@ -109,13 +109,13 @@ class MainActivity : Activity() {
         if (isAidlbound) {
 
             try {
-                val i1 = input1.getText().toString()
-                val i2 = input2.getText().toString()
+                val i1 = input1?.text.toString()
+                val i2 = input2?.text.toString()
 
                 val s = mathService.add(
                         Integer.parseInt(i1), Integer.parseInt(i2))
                 //				Toast.makeText(this, s, Toast.LENGTH_LONG).show();
-                resultText.setText(s)
+                resultText?.text ?: s
             } catch (e: RemoteException) {
                 e.printStackTrace()
             }
@@ -127,13 +127,13 @@ class MainActivity : Activity() {
         if (isAidlbound) {
 
             try {
-                val i1 = input1.getText().toString()
-                val i2 = input2.getText().toString()
+                val i1 = input1?.text.toString()
+                val i2 = input2?.text.toString()
 
                 val s = mathService.divide(
                         Integer.parseInt(i1), Integer.parseInt(i2))
                 //				Toast.makeText(this, s, Toast.LENGTH_LONG).show();
-                resultText.setText(s)
+                resultText?.text ?: s
             } catch (e: RemoteException) {
                 e.printStackTrace()
             }
@@ -168,8 +168,8 @@ class MainActivity : Activity() {
 
             val data = Bundle()
             val pid = Process.myPid()
-            val i1 = input1.getText().toString()
-            val i2 = input2.getText().toString()
+            val i1 = input1?.text.toString()
+            val i2 = input2?.text.toString()
 
             // TODO: can we get the function name and put it here?
             data.putString("TITLE", "$i1 and $i2 sender pid: $pid")
@@ -177,7 +177,7 @@ class MainActivity : Activity() {
             newMessage.setData(data)
 
             try {
-                messenger.send(newMessage)
+                messenger?.send(newMessage)
             } catch (e: RemoteException) {
                 e.printStackTrace()
             }
