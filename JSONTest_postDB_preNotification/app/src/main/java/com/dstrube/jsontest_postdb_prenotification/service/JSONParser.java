@@ -20,7 +20,7 @@ public class JSONParser {
 	
 	//Constructor
 	public JSONParser() {
-		//make contructor with url param
+		//make constructor with url param
 	}
 	
 	//Constructor

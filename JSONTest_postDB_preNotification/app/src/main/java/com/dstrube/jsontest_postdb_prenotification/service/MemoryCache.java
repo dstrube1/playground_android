@@ -13,13 +13,14 @@ import android.graphics.Bitmap;
  *
  */
 public class MemoryCache {
-	 private Map<String, SoftReference<Bitmap>> cache=Collections.synchronizedMap(new HashMap<String, SoftReference<Bitmap>>());
+	 private final Map<String, SoftReference<Bitmap>> cache=Collections.synchronizedMap(new HashMap<String, SoftReference<Bitmap>>());
 	    
 	    public Bitmap get(String id){
 	        if(!cache.containsKey(id))
 	            return null;
 	        SoftReference<Bitmap> ref=cache.get(id);
-	        return ref.get();
+			assert ref != null;
+			return ref.get();
 	    }
 	    
 	    public void put(String id, Bitmap bitmap){
