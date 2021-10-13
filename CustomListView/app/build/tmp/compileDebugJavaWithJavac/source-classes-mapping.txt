@@ -1,0 +1,10 @@
+com/custom/customlistview/ItemDetails.java
+ com.custom.customlistview.ItemDetails
+com/custom/customlistview/BuildConfig.java
+ com.custom.customlistview.BuildConfig
+com/custom/customlistview/ListViewImagesActivity.java
+ com.custom.customlistview.ListViewImagesActivity
+ com.custom.customlistview.ListViewImagesActivity$1
+com/custom/customlistview/ItemListBaseAdapter.java
+ com.custom.customlistview.ItemListBaseAdapter
+ com.custom.customlistview.ItemListBaseAdapter$ViewHolder
