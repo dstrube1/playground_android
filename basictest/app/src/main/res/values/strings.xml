@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BasicTest</string>
+    <string name="sup">Sup!</string>
 </resources>
