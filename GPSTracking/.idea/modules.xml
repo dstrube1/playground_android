@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GPSTracking.iml" filepath="$PROJECT_DIR$/.idea/modules/GPSTracking.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GPSTracking.app.unitTest.iml" />
     </modules>
   </component>
 </project>
