@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         logger = Logger.getLogger(getResources().getString(R.string.app_name));
 //        Logger.getGlobal().log(Level.SEVERE, "onCreate");
-        logger.log(Level.SEVERE, "onCreate");
+        logger.log(Level.INFO, "onCreate");
         /*
         what doesn't work:
         getAnonymous

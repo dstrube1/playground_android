@@ -2,12 +2,16 @@ package com.dstrube.gpstracking;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,6 +23,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 /**
  * This class is a bit misnamed because it can function without GPS, purely via
  * cell towers or WiFi
@@ -27,6 +34,8 @@ import android.widget.Toast;
  * 
  */
 public class GPSTracker extends Service implements LocationListener {
+
+	private final Logger logger;
 
 	private final Context mContext;
 
@@ -56,18 +65,24 @@ public class GPSTracker extends Service implements LocationListener {
 	/**
 	 * Constructor
 	 * 
-	 * @param context
+	 * @param context a context
 	 */
 	public GPSTracker(Context context) {
+		logger = Logger.getLogger(this.getClass().getName());
 		this.mContext = context;
-		getLocation();
+		Location location = getLocation();
+		logger.log(Level.INFO, "location is " + (location == null ? "null" : "not null") );
+		if (location != null && canGetLocation()){
+			logger.log(Level.INFO, "latitude: " + getLatitude() + "; longitude: " + getLongitude());
+			logger.log(Level.INFO, "address: " + getAddress());
+		}
 	}
 
 	/**
 	 * This is the meat of the class, the answer to your prayers, your dreams
 	 * come true.
 	 * 
-	 * @return
+	 * @return a Location
 	 */
 	public Location getLocation() {
 		try {
@@ -89,24 +104,32 @@ public class GPSTracker extends Service implements LocationListener {
 				// code) will change that after creating this object -
 				// instantiating this class - since canGetLocation is now
 				// explicitly private.
+				logger.log(Level.WARNING, "isGPSEnabled and isNetworkEnabled are both false" );
 			} else {
 				this.canGetLocation = true;
 				if (isNetworkEnabled) {
 				    final String permission = "android.permission.ACCESS_COARSE_LOCATION";
-					enforcePermission(permission, 0, 0, "Missing permission: " + permission);
+					//This throws a NullPointerException, but is apparently necessary for the following line:
+					try {
+						enforcePermission(permission, 0, 0, "Missing permission: " + permission);
+					} catch (NullPointerException npe){
+						Log.e(this.getClass().getName(),"NullPointerException from enforcePermission");//, npe);
+					}
 					locationManager.requestLocationUpdates(
 							LocationManager.NETWORK_PROVIDER,
 							MIN_TIME_BW_UPDATES,
 							MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-					Log.d("Network", "Network");
+					Log.d(this.getClass().getName(), "locationManager has requested LocationUpdates");
 					// why / how / when would this be null?
 					// does requestLocationUpdates possibly set it to null? :
 					if (locationManager != null) {
+						Log.d(this.getClass().getName(), "locationManager is not null; setting location with getLastKnownLocation");
 						location = locationManager
 								.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 						if (location != null) {
 							latitude = location.getLatitude();
 							longitude = location.getLongitude();
+							Log.d(this.getClass().getName(), "getLastKnownLocation has latitude " + latitude + " and longitude " + longitude);
 						}
 					}
 				}
@@ -116,12 +139,12 @@ public class GPSTracker extends Service implements LocationListener {
 
 				// if GPS Enabled get lat/long using GPS Services
 				if (isGPSEnabled) {
-					if (location == null) {
+					if (location == null && locationManager != null) {
 						locationManager.requestLocationUpdates(
 								LocationManager.GPS_PROVIDER,
 								MIN_TIME_BW_UPDATES,
 								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-						Log.d("GPS Enabled", "GPS Enabled");
+						Log.d(this.getClass().getName(), "GPS Enabled");
 						// why / how / when would this be null?
 						// does requestLocationUpdates possibly set it to null?
 						// :
@@ -131,6 +154,7 @@ public class GPSTracker extends Service implements LocationListener {
 							if (location != null) {
 								latitude = location.getLatitude();
 								longitude = location.getLongitude();
+								Log.d(this.getClass().getName(), "getLastKnownLocation has latitude " + latitude + " and longitude " + longitude);
 							}
 						}
 					}
@@ -249,7 +273,7 @@ public class GPSTracker extends Service implements LocationListener {
 		// } catch (Exception e) {
 		// e.printStackTrace();
 		// }
-
+		logger.log(Level.INFO, "onLocationChanged");
 	}
 
 	/**
@@ -257,6 +281,7 @@ public class GPSTracker extends Service implements LocationListener {
 	 */
 	@Override
 	public void onProviderDisabled(String provider) {
+		logger.log(Level.WARNING, "onProviderDisabled: " + provider);
 	}
 
 	/**
@@ -264,6 +289,7 @@ public class GPSTracker extends Service implements LocationListener {
 	 */
 	@Override
 	public void onProviderEnabled(String provider) {
+		logger.log(Level.INFO, "onProviderEnabled: " + provider);
 	}
 
 	/**
@@ -271,6 +297,14 @@ public class GPSTracker extends Service implements LocationListener {
 	 */
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
+		logger.log(Level.INFO, "onStatusChanged: " + provider + "; status: " + status);
+		String lastKey = null;
+		for (String key : extras.keySet()){
+			logger.log(Level.INFO, "Bundle key: " + key);
+			lastKey = key;
+		}
+		int satellites = extras.getInt(lastKey);
+		logger.log(Level.INFO, "satellites: " + satellites);
 	}
 
 	/**
