@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DrawRun</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="single_player_label">Single Player</string>
+    <string name="multi_player_label">Multi Player</string>
+    <string name="single_player_instructions">Choose a shape to draw</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="begin_button_label">Begin</string>
+</resources>
