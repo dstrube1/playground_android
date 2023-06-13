@@ -1,15 +1,21 @@
 package com.twotothefifth.drawrun;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import java.sql.Time;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +23,11 @@ public class SinglePlayerActivity extends AppCompatActivity implements AdapterVi
 
     private Spinner dropdown;
     private Logger logger;
+    private String[] shapes;
 
     public static final String SELECTED_ITEM_TAG = "selectedItem";
+    private SwitchCompat switchView;
+    public static final String HARD_MODE_TAG = "hardMode";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,37 +54,66 @@ public class SinglePlayerActivity extends AppCompatActivity implements AdapterVi
         super.onResume();
         logger.log(Level.INFO, "onResume");
         dropdown = findViewById(R.id.spinner1);
-        String[] items = new String[]{"--SELECT--", "SQUARE", "CIRCLE", "TRIANGLE", "RANDOM"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        shapes = new String[]{"SQUARE", "TRIANGLE", "CIRCLE"};
+        final String[] items = new String[]{"--SELECT--", "SQUARE", "TRIANGLE", "CIRCLE", "RANDOM"};
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
         dropdown.setOnItemSelectedListener(this);
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+            logger.log(Level.INFO, "Required permission found");
+        } else {
+            logger.log(Level.WARNING, "Required permission not found. Trying to get it...");
+
+            ActivityCompat.requestPermissions(this, new String[] {
+                            android.Manifest.permission.ACCESS_FINE_LOCATION,
+                            android.Manifest.permission.ACCESS_COARSE_LOCATION },
+                    1);
+        }
+
+        switchView = null; //findViewById(R.id.switchView);
+
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> var1, View var2, int position, long var4) {
-        String selectedItem = (String) dropdown.getItemAtPosition(position);
+        final String selectedItem = (String) dropdown.getItemAtPosition(position);
 
-        boolean launchMap = false;
+        boolean launchMap = true;
+        String shape = "";
         switch (selectedItem){
             case "RANDOM":
-                Toast.makeText(
-                        getApplicationContext(),
-                        "TODO", Toast.LENGTH_SHORT).show();
+                shape = getRandom();
+                break;
             case "SQUARE":
-            case "CIRCLE":
             case "TRIANGLE":
-                launchMap = true;
+            case "CIRCLE":
+                shape = selectedItem;
                 break;
             default:
                 //"--SELECT--" - do nothing
+                launchMap = false;
                 break;
         }
-        if (launchMap) {
+        if (launchMap && !shape.isEmpty()) {
             Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-            intent.putExtra(SELECTED_ITEM_TAG, selectedItem);
+            intent.putExtra(SELECTED_ITEM_TAG, shape);
+//            intent.putExtra(HARD_MODE_TAG, switchView.isSelected());
             startActivity(intent);
         }
+    }
+
+    private String getRandom(){
+        final Random random = new Random();
+        random.setSeed(System.currentTimeMillis());
+        final int index = random.nextInt(shapes.length);
+        return shapes[index];
     }
 
     @Override

@@ -3,7 +3,12 @@
     <!-- Strings used for fragments for navigation -->
     <string name="single_player_label">Single Player</string>
     <string name="multi_player_label">Multi Player</string>
-    <string name="single_player_instructions">Choose a shape to draw</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="single_player_instructions">1- Go to the center of the field</string>
+    <string name="dropdown_instructions">2- Choose a shape to draw</string>
+<!--    <string name="title_activity_maps">MapsActivity</string>-->
+    <string name="hard_mode_label">Hard Mode</string>
     <string name="begin_button_label">Begin</string>
+    <string name="start_over_button_label">Start Over</string>
+    <string name="end_button_label">End</string>
+
 </resources>

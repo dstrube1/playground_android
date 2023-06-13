@@ -79,10 +79,17 @@ public class GPSTracker extends Service implements LocationListener {
             // getting GPS status
             isGPSEnabled = locationManager
                     .isProviderEnabled(LocationManager.GPS_PROVIDER);
+            if (!isGPSEnabled){
+                Toast.makeText(mContext, "GPS is not enabled", Toast.LENGTH_SHORT).show();
+            }
 
             // getting network status
             isNetworkEnabled = locationManager
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            if (!isNetworkEnabled){
+                logger.log(Level.WARNING, "Network is not enabled");
+//                Toast.makeText(mContext, "Network is not enabled", Toast.LENGTH_SHORT).show();
+            }
 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled;
@@ -168,7 +175,7 @@ public class GPSTracker extends Service implements LocationListener {
     /**
      * Function to get latitude
      * */
-    public double getLatitude() {
+    private double getLatitude() {
         latitude = location != null ? location.getLatitude() : 0.0d;
         //This somehow throws a NPE if doing it this way
 //        if (location != null) {
@@ -180,7 +187,7 @@ public class GPSTracker extends Service implements LocationListener {
     /**
      * Function to get longitude
      * */
-    public double getLongitude() {
+    private double getLongitude() {
         //No problem with NPE here yet
         if (location != null) {
             longitude = location.getLongitude();
@@ -225,7 +232,8 @@ public class GPSTracker extends Service implements LocationListener {
                     String country = addresses.get(0).getAddressLine(2);
                     returnAddress = address + ", " + city + ", " + country;
                 }else{
-                    Toast.makeText(mContext, "No address found.", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mContext, "No address found.", Toast.LENGTH_LONG).show();
+                    logger.log(Level.WARNING, "No address found.");
                 }
             }else{
                 Toast.makeText(mContext, "Geocoder is not present.", Toast.LENGTH_LONG).show();
