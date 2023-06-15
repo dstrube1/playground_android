@@ -1,34 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SinglePlayerActivity"
     android:layout_gravity="center"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".SinglePlayerActivity">
 
     <TextView
-        android:id="@+id/instructions"
+        android:id="@+id/instructions1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/single_player_instructions" />
+        android:text="@string/single_player_instructions_1" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/instructions2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dropdown_instructions" />
+        android:text="@string/single_player_instructions_2" />
+
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
-<!--    <SwitchCompat-->
-<!--        android:id="@+id/switchView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/hard_mode_label"/>-->
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:id="@+id/instructions3a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/single_player_instructions_3_a" />
+
+    <TextView
+        android:id="@+id/instructions3b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/single_player_instructions_3_b" />
+
+    <!--    <androidx.preference.SwitchPreferenceCompat-->
+    <!-- For some reason, ^this doesn't work^ even with the dependency added in Gradle -->
+    <!-- Same thing when trying to add this:
+    <SwitchPreference
+    -->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/hardSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hard_mode_label"
+        android:visibility="invisible" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/hybridSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hybrid_map_label"
+        android:visibility="invisible"
+        />
+
 </LinearLayout>

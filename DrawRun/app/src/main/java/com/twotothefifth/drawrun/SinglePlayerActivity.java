@@ -7,14 +7,12 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.sql.Time;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,8 +24,10 @@ public class SinglePlayerActivity extends AppCompatActivity implements AdapterVi
     private String[] shapes;
 
     public static final String SELECTED_ITEM_TAG = "selectedItem";
-    private SwitchCompat switchView;
+    private SwitchCompat hardSwitch;
+    private SwitchCompat hybridSwitch;
     public static final String HARD_MODE_TAG = "hardMode";
+    public static final String HYBRID_MAP_TAG = "hybridMap";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,12 @@ public class SinglePlayerActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_single_player);
         logger = Logger.getLogger(this.getClass().getName());
         logger.log(Level.INFO, "onCreate");
+
+        //Setting a switch to a default value is not as straightforward as these make it seem:
+        //https://stackoverflow.com/questions/15607067/android-switchpreference-how-can-i-set-the-switch-preference-default-value
+        //https://developer.android.com/reference/androidx/preference/Preference
+//        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+//        PreferenceManager.setDefaultValues(this, R.id.hybridSwitch, true);
     }
 
     @Override
@@ -76,9 +82,9 @@ public class SinglePlayerActivity extends AppCompatActivity implements AdapterVi
                     1);
         }
 
-        switchView = null; //findViewById(R.id.switchView);
-
-
+        hardSwitch = findViewById(R.id.hardSwitch);
+        hybridSwitch = findViewById(R.id.hybridSwitch);
+        hybridSwitch.setChecked(true);
     }
 
     @Override
@@ -104,7 +110,8 @@ public class SinglePlayerActivity extends AppCompatActivity implements AdapterVi
         if (launchMap && !shape.isEmpty()) {
             Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
             intent.putExtra(SELECTED_ITEM_TAG, shape);
-//            intent.putExtra(HARD_MODE_TAG, switchView.isSelected());
+            intent.putExtra(HARD_MODE_TAG, hardSwitch.isChecked());
+            intent.putExtra(HYBRID_MAP_TAG, hybridSwitch.isChecked());
             startActivity(intent);
         }
     }

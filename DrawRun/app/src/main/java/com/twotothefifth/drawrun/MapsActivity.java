@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+//import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,10 +19,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
+//import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Polygon;
+//import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -45,6 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Handler handler;
     private final int interval = 1000; // 1 second
     private boolean isHardMode = false;
+    private boolean isHybridMap = true;
     private Button beginButton;
     private Button endButton;
     private int lineColor;
@@ -58,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        logger = Logger.getLogger(getResources().getString(R.string.app_name));
+        logger = Logger.getLogger(this.getClass().getName());
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -71,22 +73,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         shape = intent.getStringExtra(SinglePlayerActivity.SELECTED_ITEM_TAG);
         isHardMode = intent.getBooleanExtra(SinglePlayerActivity.HARD_MODE_TAG, false);
+        isHybridMap = intent.getBooleanExtra(SinglePlayerActivity.HYBRID_MAP_TAG, false);
 
         Toast.makeText(
                 getApplicationContext(),
                 "Drawing : " + shape, Toast.LENGTH_SHORT).show();
-         /*
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl;
-        if (pm != null) {
-            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-            //Acquire the lock
-            wl.acquire(10000);
-        }else {
-            Log.e(TAG, "Null PowerManager");
-            return;
-        }
-         */
+
+//        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+//        PowerManager.WakeLock wl;
+//        if (pm != null) {
+//            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getResources().getString(R.string.app_name));
+//            //Acquire the lock
+//            wl.acquire(5*60*1000L /*5 minutes*/);
+//        }else {
+//            logger.log(Level.SEVERE,"Null PowerManager");
+//            Toast.makeText(getApplicationContext(), "Warning: unable to achieve wakelock.", Toast.LENGTH_LONG).show();
+//        }
+
     }
 
     @Override
@@ -154,7 +157,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         center = new LatLng(33.761291, -84.393233);
 
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        if (isHybridMap) {
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        }
 
         //https://developers.google.com/android/reference/com/google/android/gms/maps/CameraUpdateFactory#newLatLngZoom(com.google.android.gms.maps.model.LatLng,%20float)
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
@@ -185,7 +190,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng pointC = new LatLng(center.latitude - latLngDelta, center.longitude - latLngDelta);
         final LatLng pointD = new LatLng(center.latitude - latLngDelta, center.longitude + latLngDelta);
 
-        final Polygon square = mMap.addPolygon(new PolygonOptions()
+        /*final Polygon square = */mMap.addPolygon(new PolygonOptions()
                 .clickable(false)
                 .add(pointA, pointB, pointC, pointD));
     }
@@ -195,14 +200,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng pointB = new LatLng(center.latitude - latLngDelta, center.longitude - latLngDelta);
         final LatLng pointC = new LatLng(center.latitude - latLngDelta, center.longitude + latLngDelta);
 
-        final Polygon triangle = mMap.addPolygon(new PolygonOptions()
+        /*final Polygon triangle = */mMap.addPolygon(new PolygonOptions()
                 .clickable(false)
                 .add(pointA, pointB, pointC));
     }
 
     private void drawCircle() {
         //https://developers.google.com/android/reference/com/google/android/gms/maps/model/Circle
-        final Circle circle = mMap.addCircle(new CircleOptions()
+        /*final Circle circle = */mMap.addCircle(new CircleOptions()
                 .center(center)
                 .radius(radius));
     }
@@ -226,6 +231,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private final Runnable runnable = new Runnable() {
         public void run() {
+            if (gpsTracker == null){
+                Toast.makeText(context, "Error - null gpsTracker", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if (gpsTracker.getLocation() == null){
+                Toast.makeText(context, "Error - null gpsTracker.getLocation()", Toast.LENGTH_LONG).show();
+                return;
+            }
             final LatLng inputKey = new LatLng(gpsTracker.getLocation().getLatitude(), gpsTracker.getLocation().getLongitude());
             if (!coords.containsKey(inputKey)) {
                 logger.log(Level.INFO, "Still playing...");
