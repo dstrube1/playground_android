@@ -13,13 +13,17 @@
         android:id="@+id/instructions1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/single_player_instructions_1" />
+        android:text="@string/single_player_instructions_1"
+        android:textSize="20sp"
+        android:layout_gravity="start"/>
 
     <TextView
         android:id="@+id/instructions2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/single_player_instructions_2" />
+        android:text="@string/single_player_instructions_2"
+        android:textSize="20sp"
+        android:layout_gravity="start"/>
 
     <Spinner
         android:id="@+id/spinner1"
@@ -32,13 +36,17 @@
         android:id="@+id/instructions3a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/single_player_instructions_3_a" />
+        android:text="@string/single_player_instructions_3_a"
+        android:textSize="20sp"
+        android:layout_gravity="start"/>
 
     <TextView
         android:id="@+id/instructions3b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/single_player_instructions_3_b" />
+        android:text="@string/single_player_instructions_3_b"
+        android:textSize="20sp"
+        android:layout_gravity="start"/>
 
     <!--    <androidx.preference.SwitchPreferenceCompat-->
     <!-- For some reason, ^this doesn't work^ even with the dependency added in Gradle -->

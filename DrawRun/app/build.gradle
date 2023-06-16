@@ -11,8 +11,8 @@ android {
         applicationId "com.twotothefifth.drawrun"
         minSdk 22
         targetSdk 33
-        versionCode 5
-        versionName "Beta-0"
+        versionCode 6
+        versionName "Alpha-4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -53,8 +53,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double latLngDelta;
     private int radius;
     private final int polylineWidth = 10;
-
     private Polyline polyline;
+    private volatile boolean isPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +155,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         gpsTracker = new GPSTracker(getApplicationContext());
 
-        center = new LatLng(33.761291, -84.393233);
+        if (gpsTracker.getLocation() == null) {
+            Toast.makeText(context, "Error - null gpsTracker.getLocation()", Toast.LENGTH_LONG).show();
+            start_over_click(null);
+            return;
+        }
+        center = new LatLng(gpsTracker.getLocation().getLatitude(), gpsTracker.getLocation().getLongitude());
+        //Centennial Olympic Park:
+        //33.761291, -84.393233);
 
         if (isHybridMap) {
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -169,6 +176,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         logger.log(Level.INFO, "address: " + gpsTracker.getAddress());
 
+        drawShape();
+    }
+
+    private void drawShape() {
         switch (shape) {
             case "SQUARE":
                 drawSquare();
@@ -190,7 +201,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng pointC = new LatLng(center.latitude - latLngDelta, center.longitude - latLngDelta);
         final LatLng pointD = new LatLng(center.latitude - latLngDelta, center.longitude + latLngDelta);
 
-        /*final Polygon square = */mMap.addPolygon(new PolygonOptions()
+        /*final Polygon square = */
+        mMap.addPolygon(new PolygonOptions()
                 .clickable(false)
                 .add(pointA, pointB, pointC, pointD));
     }
@@ -200,30 +212,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final LatLng pointB = new LatLng(center.latitude - latLngDelta, center.longitude - latLngDelta);
         final LatLng pointC = new LatLng(center.latitude - latLngDelta, center.longitude + latLngDelta);
 
-        /*final Polygon triangle = */mMap.addPolygon(new PolygonOptions()
+        /*final Polygon triangle = */
+        mMap.addPolygon(new PolygonOptions()
                 .clickable(false)
                 .add(pointA, pointB, pointC));
     }
 
     private void drawCircle() {
         //https://developers.google.com/android/reference/com/google/android/gms/maps/model/Circle
-        /*final Circle circle = */mMap.addCircle(new CircleOptions()
+        /*final Circle circle = */
+        mMap.addCircle(new CircleOptions()
                 .center(center)
                 .radius(radius));
     }
 
     public void begin_click(View view) {
-        Toast.makeText(this, "Beginning " + shape + "...", Toast.LENGTH_LONG).show();
-        coords = new HashMap<>();
+        if (beginButton.getText() == getResources().getText(R.string.begin_button_label)) {
+            Toast.makeText(this, "Starting " + shape + "...", Toast.LENGTH_LONG).show();
+            mMap.clear();
+            drawShape();
+            isPaused = false;
 
-        handler = new Handler();
+            coords = new HashMap<>();
 
-        //Every 5 seconds, add a LatLng to the map
-        handler.postDelayed(runnable, interval);
-        beginButton.setEnabled(false);
-        endButton.setEnabled(true);
-        if (polyline != null) {
-            polyline.setVisible(false);
+            handler = new Handler();
+
+            //Every second, add a LatLng to the map
+            handler.postDelayed(runnable, interval);
+//        beginButton.setEnabled(false);
+            beginButton.setText(getResources().getText(R.string.pause_button_label));
+            endButton.setEnabled(true);
+            //We clear and (re)draw the map at the top because this doesn't seem to do anything:
+//            if (polyline != null) {
+//                polyline.setVisible(false);
+//            }
+        } else if (beginButton.getText() == getResources().getText(R.string.pause_button_label)) {
+            Toast.makeText(this, "Pausing " + shape + "...", Toast.LENGTH_LONG).show();
+
+            //Setting this to true should automatically pause the handler's runnable
+            isPaused = true;
+
+            beginButton.setText(getResources().getText(R.string.resume_button_label));
+        } else if (beginButton.getText() == getResources().getText(R.string.resume_button_label)) {
+            Toast.makeText(this, "Resuming " + shape + "...", Toast.LENGTH_LONG).show();
+            isPaused = false;
+            beginButton.setText(getResources().getText(R.string.pause_button_label));
+            handler.postDelayed(runnable, interval);
         }
     }
 
@@ -231,12 +265,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private final Runnable runnable = new Runnable() {
         public void run() {
-            if (gpsTracker == null){
-                Toast.makeText(context, "Error - null gpsTracker", Toast.LENGTH_LONG).show();
+            if (gpsTracker == null || gpsTracker.getLocation() == null) {
+                if (gpsTracker == null) {
+                    Toast.makeText(context, "Error - null gpsTracker", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Error - null gpsTracker.getLocation()", Toast.LENGTH_LONG).show();
+                }
+                start_over_click(null);
                 return;
             }
-            if (gpsTracker.getLocation() == null){
-                Toast.makeText(context, "Error - null gpsTracker.getLocation()", Toast.LENGTH_LONG).show();
+            if (isPaused){
                 return;
             }
             final LatLng inputKey = new LatLng(gpsTracker.getLocation().getLatitude(), gpsTracker.getLocation().getLongitude());
@@ -257,6 +295,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             .clickable(false)
                             .addAll(coords.keySet()));
                     polyline.setVisible(true);
+                    beginButton.setText(getResources().getText(R.string.begin_button_label));
+                    endButton.setEnabled(false);
                     logger.log(Level.INFO, "Drawn from timeout");
                 } else {
                     handler.postDelayed(this, interval);
@@ -269,7 +309,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (handler != null && runnable != null) {
             handler.removeCallbacks(runnable);
         }
-        beginButton.setEnabled(true);
+        beginButton.setText(getResources().getText(R.string.begin_button_label));
         endButton.setEnabled(false);
         mMap.clear();
         Intent intent = new Intent(getApplicationContext(), SinglePlayerActivity.class);
@@ -277,7 +317,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void end_click(View view) {
-        beginButton.setEnabled(true);
+        beginButton.setText(getResources().getText(R.string.begin_button_label));
         endButton.setEnabled(false);
         if (handler != null && runnable != null) {
             handler.removeCallbacks(runnable);
