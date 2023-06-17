@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-//import android.os.PowerManager;
+import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -79,17 +79,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getApplicationContext(),
                 "Drawing : " + shape, Toast.LENGTH_SHORT).show();
 
-//        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-//        PowerManager.WakeLock wl;
-//        if (pm != null) {
-//            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getResources().getString(R.string.app_name));
-//            //Acquire the lock
-//            wl.acquire(5*60*1000L /*5 minutes*/);
-//        }else {
-//            logger.log(Level.SEVERE,"Null PowerManager");
-//            Toast.makeText(getApplicationContext(), "Warning: unable to achieve wakelock.", Toast.LENGTH_LONG).show();
-//        }
-
     }
 
     @Override
@@ -105,12 +94,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         lineColor = ContextCompat.getColor(context, R.color.white);
 
+        coords = new HashMap<>();
+
+        handler = new Handler();
+
         if (isHardMode) {
             latLngDelta = 0.00025;
             radius = 25;
         } else {
             latLngDelta = 0.0001;
             radius = 10;
+        }
+
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wl;
+        if (pm != null) {
+            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getResources().getString(R.string.app_name));
+            //Acquire the lock
+            wl.acquire(5*60*1000L /*5 minutes*/);
+        }else {
+            logger.log(Level.SEVERE,"Null PowerManager");
+            Toast.makeText(getApplicationContext(), "Warning: unable to achieve wakelock.", Toast.LENGTH_LONG).show();
         }
 
         logger.log(Level.INFO, "binding is " + (binding == null ? "null" : "not null"));
@@ -168,11 +172,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         }
 
+        final float zoomLevel = isHardMode ? 19.0f : 21.0f;
+
         //https://developers.google.com/android/reference/com/google/android/gms/maps/CameraUpdateFactory#newLatLngZoom(com.google.android.gms.maps.model.LatLng,%20float)
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
 //                new LatLng(gpsTracker.getLocation().getLatitude(), gpsTracker.getLocation().getLongitude()),
                 center,
-                21.0f));
+                zoomLevel));
 
         logger.log(Level.INFO, "address: " + gpsTracker.getAddress());
 
@@ -233,13 +239,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             drawShape();
             isPaused = false;
 
-            coords = new HashMap<>();
-
-            handler = new Handler();
-
             //Every second, add a LatLng to the map
             handler.postDelayed(runnable, interval);
-//        beginButton.setEnabled(false);
+//            beginButton.setEnabled(false);
             beginButton.setText(getResources().getText(R.string.pause_button_label));
             endButton.setEnabled(true);
             //We clear and (re)draw the map at the top because this doesn't seem to do anything:
@@ -317,6 +319,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void end_click(View view) {
+        Toast.makeText(this, "Stopping " + shape + "...", Toast.LENGTH_LONG).show();
         beginButton.setText(getResources().getText(R.string.begin_button_label));
         endButton.setEnabled(false);
         if (handler != null && runnable != null) {

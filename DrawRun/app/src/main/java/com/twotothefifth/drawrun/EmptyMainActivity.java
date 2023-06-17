@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.logging.Level;
@@ -20,15 +20,6 @@ public class EmptyMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_empty_main);
         logger = Logger.getLogger(this.getClass().getName());//getResources().getString(R.string.app_name));
         logger.log(Level.INFO, "onCreate");
-    }
-
-    public void multi_player_click(View view) {
-        Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_LONG).show();
-    }
-
-    public void single_player_click(View view) {
-        Intent intent = new Intent(getApplicationContext(), SinglePlayerActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -47,6 +38,16 @@ public class EmptyMainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         logger.log(Level.INFO, "onResume");
+        final Button singlePlayerButton = findViewById(R.id.single_player_button);
+        singlePlayerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), SinglePlayerActivity.class);
+            startActivity(intent);
+        });
+
+        final Button multiPlayerButton = findViewById(R.id.multi_player_button);
+        multiPlayerButton.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_LONG).show();
+        });
     }
 
     @Override

@@ -3,8 +3,9 @@
     <!-- Strings used for fragments for navigation -->
     <string name="single_player_label">Single Player</string>
     <string name="multi_player_label">Multi Player</string>
-    <string name="single_player_instructions_1">1- Go to the center of the open space.</string>
+    <string name="single_player_instructions_1">1- Go to the center of an open space.</string>
     <string name="single_player_instructions_2">2- Choose a shape to draw.</string>
+    <string name="single_player_instructions_3">3- Once the guidelines are drawn on the map, go to where the they are before tapping Start.</string>
     <string name="single_player_instructions_3_a">3- Once the guidelines are drawn on the map,</string>
     <string name="single_player_instructions_3_b">go to where the they are before tapping Start.</string>
     <!--    <string name="title_activity_maps">MapsActivity</string>-->

@@ -1,8 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        mavenCentral()
         google()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.0.2'
@@ -12,12 +12,24 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
 plugins {
     id 'com.android.application' version '8.0.2' apply false
     id 'com.android.library' version '8.0.2' apply false
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
 }
+
+//This
+//https://developers.google.com/games/services/android/quickstart#step_3_modify_your_code
+// says we need this:
+//allprojects {
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//}
+//But then I get this error:
+//https://stackoverflow.com/questions/69163511/build-was-configured-to-prefer-settings-repositories-over-project-repositories-b
+//https://stackoverflow.com/questions/69733708/build-was-configured-to-prefer-settings-repositories-over-project-repositories-b
 
 task clean(type: Delete) {
     delete rootProject.buildDir
