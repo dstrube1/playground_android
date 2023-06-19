@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:text="@string/hard_mode_label"
         android:textSize="20sp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/hybridSwitch"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:text="@string/hybrid_map_label"
         android:textSize="20sp"
-        android:visibility="invisible"
+        android:visibility="visible"
         />
 
 </LinearLayout>
