@@ -28,7 +28,7 @@ public class PlaceService {
         StringBuilder urlString = new StringBuilder(
                 "https://maps.googleapis.com/maps/api/place/search/json?");
 
-        if (place.equals("")) {
+        if (place.isEmpty()) {
             urlString.append("&location=");
             urlString.append(Double.toString(latitude));
             urlString.append(",");

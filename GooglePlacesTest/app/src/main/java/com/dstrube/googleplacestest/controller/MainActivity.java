@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
+
 import com.dstrube.googleplacestest.R;
 import com.dstrube.googleplacestest.model.Place;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,10 +40,10 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // if (savedInstanceState == null) {
-        // getSupportFragmentManager().beginTransaction()
-        // .add(R.id.container, new PlaceholderFragment()).commit();
-        // }
+//         if (savedInstanceState == null) {
+//         getSupportFragmentManager().beginTransaction()
+//         .add(R.id.container, new PlaceholderFragment()).commit();
+//         }
 
 //        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 //                .getMapAsync(this);
@@ -50,24 +52,25 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
 
         setCurrentLocation();
 
-        final ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
-        actionBar.setListNavigationCallbacks(ArrayAdapter.createFromResource(
-                this, R.array.places, android.R.layout.simple_list_item_1),
-                new ActionBar.OnNavigationListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(int itemPosition,
-                                                            long itemId) {
-                        if (location != null) {
-                            map.clear();
-                            new GetPlaces(MainActivity.this,
-                                    places[itemPosition].toLowerCase().replace(
-                                            "-", "_")).execute();
-                        }
-                        return true;
-                    }
-                });
+//        final ActionBar actionBar = getActionBar();
+//        assert actionBar != null;
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//
+//        actionBar.setListNavigationCallbacks(ArrayAdapter.createFromResource(
+//                        this, R.array.places, android.R.layout.simple_list_item_1),
+//                new ActionBar.OnNavigationListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(int itemPosition,
+//                                                            long itemId) {
+//                        if (location != null) {
+//                            map.clear();
+//                            new GetPlaces(MainActivity.this,
+//                                    places[itemPosition].toLowerCase().replace(
+//                                            "-", "_")).execute();
+//                        }
+//                        return true;
+//                    }
+//                });
 
     }
 
@@ -108,15 +111,15 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
         }
 
         @Override
-        public void onProviderEnabled(String provider) {
+        public void onProviderEnabled(@NonNull String provider) {
         }
 
         @Override
-        public void onProviderDisabled(String provider) {
+        public void onProviderDisabled(@NonNull String provider) {
         }
 
         @Override
-        public void onLocationChanged(Location newLocation) {
+        public void onLocationChanged(@NonNull Location newLocation) {
             location = newLocation;
             locationManager.removeUpdates(listener);
         }
@@ -202,7 +205,7 @@ public class MainActivity extends Activity implements OnMapReadyCallback {
                                 .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                         .snippet(result.get(i).getVicinity()));
             }
-            if (result.size() > 0) {
+            if (!result.isEmpty()) {
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(result.get(0).getLatitude(), result
                                 .get(0).getLongitude())) // Sets the center of
