@@ -3,11 +3,14 @@ package com.dstrube.myapplication;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 public class MyAlarmService extends Service {
     private static final String TAG = MyAlarmService.class.getSimpleName();
@@ -47,6 +50,7 @@ public class MyAlarmService extends Service {
 //        vibrator.vibrate(500);
 //    }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 //        if (! isStarted) {
