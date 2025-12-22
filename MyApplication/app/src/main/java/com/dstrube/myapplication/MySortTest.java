@@ -78,7 +78,7 @@ public class MySortTest {
         return true;
     }
 
-    public static void binaryTreeSort() throws NoSuchMethodException {
+    public static void binaryTreeSort(int size) {
         //https://en.wikipedia.org/wiki/Tree_sort
         //http://www.qmatica.com/DataStructures/Trees/BST.html
         //http://postimg.org/image/a76lcv16r/
@@ -87,7 +87,48 @@ public class MySortTest {
         //http://math.hws.edu/javanotes/c9/s4.html
 
 //TODO
-        throw new NoSuchMethodException();
+        final Random random = new Random();
+        final int root = random.nextInt();
+        System.out.print("root:" + root);
+        final BinaryTree binaryTreeUnsorted = makeUnsortedTree(size, new BinaryTree(root));
+
+        System.out.println("Unsorted tree: ");
+        printTree(binaryTreeUnsorted);
+        //BinaryTreeSort binaryTreeSort = new BinaryTreeSort();
+        //TODO traverse, inserting from top down
+    }
+
+    private static BinaryTree makeUnsortedTree(int size, BinaryTree bt){
+        final Random random = new Random();
+        if (size == 0){
+            final int left = random.nextInt();
+            bt.left = new BinaryTree(left);
+            final int right = random.nextInt();
+            bt.right = new BinaryTree(right);
+            System.out.print(";L:" + left);
+            System.out.print(";R:" + right);
+        }else{
+            size--;
+            bt.left = makeUnsortedTree(size, bt);
+            bt.right = makeUnsortedTree(size, bt);
+        }
+        return bt;
+    }
+
+    private static void printTree(BinaryTree binaryTree){
+        if (binaryTree.left == null){
+            System.out.print(";End of L");
+        }else{
+            System.out.print(";L:");
+            printTree(binaryTree.left);
+        }
+        if (binaryTree.right == null){
+            System.out.print(";End of R");
+        }else{
+            System.out.print(";R:");
+            printTree(binaryTree.right);
+        }
+        System.out.print(binaryTree.item);
     }
 
     public static void bubbleSort(final int[] array) {
@@ -230,6 +271,7 @@ public class MySortTest {
     }
 
     public static void inPlaceSort(int[] array) throws NoSuchMethodException {
+        //TODO: https://en.wikipedia.org/wiki/Merge_sort#In-place_merge_sort
         throw new NoSuchMethodException();
     }
 
